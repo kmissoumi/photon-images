@@ -1,0 +1,15 @@
+apiVersion: v1alpha
+kind: imagerunner
+region: us-west-1
+suites:
+  - name: photon-js-appium-app
+    image: suncup/photon-js:0.1.0
+    imagePullAuth:
+      user: ${SAUCE_IMAGE_USER}
+      token: ${SAUCE_IMAGE_TOKEN}
+    entrypoint: npm run --prefix appium-/best-practices test.saucelabs.ios.sim.us
+    env:
+      SAUCE_USERNAME: ${SAUCE_USERNAME}
+      SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
+      SAUCE_REGION: us-west-1
+      BUILD_NAME: ${BUILD_NAME}
