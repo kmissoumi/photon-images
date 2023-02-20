@@ -1,6 +1,6 @@
 import config from './wdio.shared.sauce.conf';
 
-const buildName = `Android Emulator Native App Best Practices build-${new Date().getTime()}`;
+const buildName = `Android Emulator Native App ${new Date().getTime()}`;
 
 // ===================================================================================
 // Capabilities
@@ -43,6 +43,7 @@ config.capabilities = ['9.0', '10.0', '11', '12'].map((osVersion: string) => ({
   // https://www.w3.org/TR/webdriver1/#dfn-extension-capability
   'sauce:options': {
     build: buildName,
+    tags: [ config.buildType, 'demo', 'js'],
     // Android 12 needs `1.22.1`, the max for the other Android versions
     // is currently `1.20.2`
     appiumVersion: osVersion === '12' ? '1.22.1' : '1.20.2',

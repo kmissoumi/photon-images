@@ -3,8 +3,11 @@ import { SauceRegions } from '@wdio/types/build/Options';
 import SauceLabs, { Job } from 'saucelabs';
 
 const defaultBrowserSauceOptions = {
-  build: `WebdriverIO Async Best Practices: Sauce Labs Desktop Web build-${new Date().getTime()}`,
+
+  build: `WebdriverIO Async Desktop Web ${new Date().getTime()}`,
   screenResolution: '1600x1200',
+  tags: [ (process.env.BUILD_TYPE || 'standard'), 'demo', 'js'  ],
+
 };
 
 // =====================
@@ -16,8 +19,7 @@ config.key = process.env.SAUCE_ACCESS_KEY;
 // in via the `region` property. Available short handles for regions are `us` (default) and `eu`.
 // These regions are used for the Sauce Labs VM cloud and the Sauce Labs Real Device Cloud.
 // If you don't provide the region, it defaults to `us`.
-config.region = (process.env.REGION || 'us') as SauceRegions;
-
+config.region = (process.env.SAUCE_REGION || 'us') as SauceRegions;
 // ============
 // Capabilities
 // ============
@@ -83,7 +85,7 @@ config.capabilities = [
   },
   {
     browserName: 'safari',
-    platformName: 'macOS 12',
+    platformName: 'macOS 13',
     browserVersion: '16',
     'sauce:options': {
       ...defaultBrowserSauceOptions,

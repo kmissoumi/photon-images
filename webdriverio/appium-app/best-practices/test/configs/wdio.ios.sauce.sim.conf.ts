@@ -1,6 +1,6 @@
 import config from './wdio.shared.sauce.conf';
 
-const buildName = `iOS Simulator Native App Best Practices build-${new Date().getTime()}`;
+const buildName = `iOS Simulator Native App ${new Date().getTime()}`;
 
 // ===================================================================================
 // Capabilities
@@ -43,8 +43,10 @@ config.capabilities = ['12.4', '13.4', '14.5', '15.0'].map(
     // https://www.w3.org/TR/webdriver1/#dfn-extension-capability
     'sauce:options': {
       build: buildName,
+      tags: [ config.buildType, 'demo', 'js'],
       // iOS 15 needs Appium `1.22.0` or higher
       appiumVersion: osVersion === '15.0' ? '1.22.0' : '1.21.0',
+      tags: [ config.tags ],
     },
   })
 );

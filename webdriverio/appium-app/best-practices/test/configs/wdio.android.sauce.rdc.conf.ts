@@ -1,6 +1,6 @@
 import config from './wdio.shared.sauce.conf';
 
-const buildName = `Android Native App Best Practices build-${new Date().getTime()}`;
+const buildName = `Android Native App ${new Date().getTime()}`;
 
 // ===================================================================================
 // Capabilities
@@ -42,6 +42,7 @@ config.capabilities = [
     // https://www.w3.org/TR/webdriver1/#dfn-extension-capability
     'sauce:options': {
       build: buildName,
+      tags: [ config.buildType, 'demo', 'js'],
       // Select only phone devices
       // @ts-ignore
       phoneOnly: true,

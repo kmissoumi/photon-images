@@ -4,14 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test.saucelabs.android.emu.eu": "REGION=eu npx wdio test/configs/wdio.android.sauce.emu.conf.ts",
-    "test.saucelabs.android.emu.us": "npx wdio test/configs/wdio.android.sauce.emu.conf.ts",
-    "test.saucelabs.android.rdc.eu": "RDC=true REGION=eu npx wdio test/configs/wdio.android.sauce.rdc.conf.ts",
-    "test.saucelabs.android.rdc.us": "RDC=true npx wdio test/configs/wdio.android.sauce.rdc.conf.ts",
-    "test.saucelabs.ios.rdc.eu": "RDC=true REGION=eu npx wdio test/configs/wdio.ios.sauce.rdc.conf.ts",
-    "test.saucelabs.ios.rdc.us": "RDC=true npx wdio test/configs/wdio.ios.sauce.rdc.conf.ts",
-    "test.saucelabs.ios.sim.eu": "REGION=eu npx wdio test/configs/wdio.ios.sauce.sim.conf.ts",
-    "test.saucelabs.ios.sim.us": "npx wdio test/configs/wdio.ios.sauce.sim.conf.ts"
+    "test.saucelabs.android.emu": "npx wdio test/configs/wdio.android.sauce.emu.conf.ts",
+    "test.saucelabs.android.rdc": "RDC=true npx wdio test/configs/wdio.android.sauce.rdc.conf.ts",
+    "test.saucelabs.ios.sim": "npx wdio test/configs/wdio.ios.sauce.sim.conf.ts",
+    "test.saucelabs.ios.rdc": "RDC=true npx wdio test/configs/wdio.ios.sauce.rdc.conf.ts"
   },
   "keywords": [],
   "author": "",
