@@ -17,7 +17,8 @@ COPY webdriverio/appium-web/best-practices/package.json .
 RUN npm install
 
 
-
+# now with less build time
+# install steps cached and kept separate from test code
 FROM node:16-alpine
 
 RUN apk update && apk add curl bash && rm -rf /var/cache/apk/*
