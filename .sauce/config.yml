@@ -3,11 +3,11 @@ kind: imagerunner
 region: us-west-1
 suites:
   - name: photon-js-appium-app
-    image: suncup/photon-js:0.1.0
+    image: suncup/photon-js:0.1.1
     imagePullAuth:
       user: ${SAUCE_IMAGE_USER}
       token: ${SAUCE_IMAGE_TOKEN}
-    entrypoint: npm run --prefix appium-/best-practices test.saucelabs.ios.sim.us
+    entrypoint: npm run --prefix webdriver/best-practices test.saucelabs.us
     env:
       SAUCE_USERNAME: ${SAUCE_USERNAME}
       SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
