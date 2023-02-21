@@ -34,4 +34,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            suncup/photon-js:0.1.1
+            suncup/photon-js:0.0.5
