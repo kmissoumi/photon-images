@@ -2,18 +2,24 @@ FROM node:16-alpine AS builder
 
 RUN apk update && apk add curl bash && rm -rf /var/cache/apk/*
 
-WORKDIR /usr/build
+ARG webdriverPath="webdriverio/webdriver/best-practices"
+ARG appiumAppPath="webdriverio/appium-app/best-practices"
+ARG appiumWebPath="webdriverio/appium-web/best-practices"
+ARG basePath="/usr/build"
 
-WORKDIR /usr/build/webdriverio/webdriver/best-practices
-COPY webdriverio/webdriver/best-practices/package.json .
+ARG webdriverPath="webdriverio/webdriver/best-practices"
+
+
+WORKDIR ${basePath}/${webdriverPath}
+COPY ${webdriverPath}/package.json .
 RUN npm install
 
-WORKDIR /usr/build/webdriverio/appium-app/best-practices
-COPY webdriverio/appium-app/best-practices/package.json .
+WORKDIR ${basePath}/${appiumAppPath}
+COPY ${appiumAppPath}/package.json .
 RUN npm install
 
-WORKDIR /usr/build/webdriverio/appium-web/best-practices
-COPY webdriverio/appium-web/best-practices/package.json .
+WORKDIR ${basePath}/${appiumWebPath}
+COPY ${appiumWebPath}/package.json .
 RUN npm install
 
 
@@ -23,12 +29,13 @@ FROM node:16-alpine
 
 RUN apk update && apk add curl bash && rm -rf /var/cache/apk/*
 
-WORKDIR /usr/build
+WORKDIR ${basePath}
 
-COPY /webdriverio/appium-app/best-practices /usr/build/appium-app/best-practices
-COPY /webdriverio/appium-web/best-practices /usr/build/appium-web/best-practices
-COPY /webdriverio/webdriver/best-practices  /usr/build/webdriver/best-practices
+COPY ${appiumAppPath} ${basePath}/${appiumAppPath}
+COPY ${appiumWebPath} ${basePath}/${appiumWebPath}
+COPY ${webdriverPath} ${basePath}/${webdriverPath}
 
-COPY --from=builder /usr/build/webdriverio/appium-app/best-practices/node_modules /usr/build/appium-app/best-practices/node_modules
-COPY --from=builder /usr/build/webdriverio/appium-web/best-practices/node_modules /usr/build/appium-web/best-practices/node_modules
-COPY --from=builder /usr/build/webdriverio/webdriver/best-practices/node_modules  /usr/build/webdriver/best-practices/node_modules
+COPY --from=builder ${basePath}/${appiumAppPath}/node_modules ${basePath}/${appiumAppPath}/node_modules
+COPY --from=builder ${basePath}/${appiumWebPath}/node_modules ${basePath}/${appiumWebPath}/node_modules
+COPY --from=builder ${basePath}/${webdriverPath}/node_modules ${basePath}/${webdriverPath}/node_modules
+
