@@ -7,7 +7,6 @@ ARG appiumAppPath="webdriverio/appium-app/best-practices"
 ARG appiumWebPath="webdriverio/appium-web/best-practices"
 ARG basePath="/usr/build"
 
-ARG webdriverPath="webdriverio/webdriver/best-practices"
 
 
 WORKDIR ${basePath}/${webdriverPath}
@@ -28,6 +27,11 @@ RUN npm install
 FROM node:16-alpine
 
 RUN apk update && apk add curl bash && rm -rf /var/cache/apk/*
+
+ARG webdriverPath="webdriverio/webdriver/best-practices"
+ARG appiumAppPath="webdriverio/appium-app/best-practices"
+ARG appiumWebPath="webdriverio/appium-web/best-practices"
+ARG basePath="/usr/build"
 
 WORKDIR ${basePath}
 
