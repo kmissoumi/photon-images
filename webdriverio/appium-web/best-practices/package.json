@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test.saucelabs.android.us": "wdio test/configs/wdio.saucelabs.android.conf.js",
-    "test.saucelabs.android.eu": "REGION=eu wdio test/configs/wdio.saucelabs.android.conf.js",
-    "test.saucelabs.ios.us": "wdio test/configs/wdio.saucelabs.ios.conf.js",
-    "test.saucelabs.ios.eu": "REGION=eu wdio test/configs/wdio.saucelabs.ios.conf.js"
+    "test.saucelabs.android": "wdio test/configs/wdio.saucelabs.android.conf.js",
+    "test.saucelabs.ios.": "wdio test/configs/wdio.saucelabs.ios.conf.js"
   },
   "keywords": [],
   "author": "",

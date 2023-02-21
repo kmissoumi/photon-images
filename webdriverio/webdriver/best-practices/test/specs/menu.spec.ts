@@ -24,7 +24,7 @@ describe('Menu', () => {
     });
 
     // Don't execute this test on the EU DC, the saucelabs.com url is not working there making this test fail
-    if(!process.env.REGION) {
+    if(!process.env.SAUCE_REGION) {
         it('should be able to open the about page', async () => {
             await MenuPage.openAboutPage();
 

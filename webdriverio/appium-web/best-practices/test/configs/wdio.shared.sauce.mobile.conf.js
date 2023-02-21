@@ -10,7 +10,7 @@ config.services = config.services.concat([['sauce']]);
 // =================
 config.user = process.env.SAUCE_USERNAME;
 config.key = process.env.SAUCE_ACCESS_KEY;
-config.region = process.env.REGION || 'us';
+config.region = process.env.SAUCE_REGION || 'us';
 
 // ===================
 // Shared Capabilities
