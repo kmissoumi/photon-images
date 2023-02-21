@@ -3,16 +3,10 @@ kind: imagerunner
 region: ${SAUCE_REGION}
 suites:
   - name: photon-js-webdriver
-    image: suncup/photon-js:0.1.1
-    imagePullAuth:
-      user: ${SAUCE_IMAGE_USER}
-      token: ${SAUCE_IMAGE_TOKEN}
-    entrypoint: npm run --prefix webdriver/best-practices test.saucelabs
+    image: suncup/photon-js:0.0.5
+    entrypoint: npm run --prefix webdriverio/webdriver/best-practices test.saucelabs
     env:
       SAUCE_USERNAME: ${SAUCE_USERNAME}
       SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
       SAUCE_REGION: ${SAUCE_REGION}
-      BUILD_TYPE: hosted
-    artifacts:
-      - "/root/.npm/_logs/*.log"
-
+      BUILD_TYPE: "hosted"
