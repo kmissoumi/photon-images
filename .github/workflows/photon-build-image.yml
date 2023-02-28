@@ -52,4 +52,4 @@ jobs:
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
           SAUCE_REGION: "us-west-1"
           BUILD_TYPE: "ci-photon"
-          IMAGE_TAG: {{ GITHUB_RUN_NUMBER }}
+          IMAGE_TAG: ${{ GITHUB_RUN_NUMBER }}
