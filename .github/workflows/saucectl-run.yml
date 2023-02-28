@@ -7,58 +7,63 @@ on:
     branches:
       - "main"
 
-- uses: saucelabs/saucectl-run-action@v3
-  env:
-    GITHUB_TOKEN: ${{ github.token }}
-  with:
-    # Which version of saucectl.
-    # Default: latest
-    saucectl-version: latest
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        uses: saucelabs/saucectl-run-action@v3
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          # Which version of saucectl.
+          # Default: latest
+          saucectl-version: latest
 
-    # Sauce Labs Credentials.
-  #  sauce-username: ${{ secrets.SAUCE_USERNAME }}
-   # sauce-access-key: ${{ secrets.SAUCE_ACCESS_KEY }}
+          # Sauce Labs Credentials.
+        #  sauce-username: ${{ secrets.SAUCE_USERNAME }}
+        # sauce-access-key: ${{ secrets.SAUCE_ACCESS_KEY }}
 
-    # Install saucectl, but don't run it.
-    # Default: false
-    # skip-run: false
+          # Install saucectl, but don't run it.
+          # Default: false
+          # skip-run: false
 
-    # Relative path under $GITHUB_WORKSPACE to use as the new working directory.
-    # working-directory: ""
+          # Relative path under $GITHUB_WORKSPACE to use as the new working directory.
+          # working-directory: ""
 
-    # An environment variable key-value pair that may be referenced in the tests executed by this command.
-    # Currently not supported by espresso/xcuitest.
-   # env: |
-    #  SAUCE_USERNAME: ${secrets.SAUCE_USERNAME}
-    #  SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
-    #  SAUCE_REGION: ${SAUCE_REGION}
+          # An environment variable key-value pair that may be referenced in the tests executed by this command.
+          # Currently not supported by espresso/xcuitest.
+        # env: |
+          #  SAUCE_USERNAME: ${secrets.SAUCE_USERNAME}
+          #  SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
+          #  SAUCE_REGION: ${SAUCE_REGION}
 
-    # Specify an alternative configuration file for this execution.
-    # Default: .sauce/config.yml
-    config-file: .sauce/config-webdriver-best-practices.yml
+          # Specify an alternative configuration file for this execution.
+          # Default: .sauce/config.yml
+          config-file: .sauce/config-webdriver-best-practices.yml
 
-    # Specifies the Sauce Labs data center through which tests will run.
-    # Valid values are us-west-1 or eu-central-1.
-    # Default: us-west-1
-    # region: us-west-1
+          # Specifies the Sauce Labs data center through which tests will run.
+          # Valid values are us-west-1 or eu-central-1.
+          # Default: us-west-1
+          # region: us-west-1
 
-    # Controls how many suites run in parallel.
-    # Default: 1
-    # concurrency: 1
+          # Controls how many suites run in parallel.
+          # Default: 1
+          # concurrency: 1
 
-    # Global timeout that limits how long saucectl can run in total.
-    # Supports duration values like '10s', '30m' etc.
-    # timeout: 5m
+          # Global timeout that limits how long saucectl can run in total.
+          # Supports duration values like '10s', '30m' etc.
+          # timeout: 5m
 
-    # Identifies an active Sauce Connect tunnel to use for secure connectivity to the Sauce Labs cloud.
-    # tunnel-name: ""
+          # Identifies an active Sauce Connect tunnel to use for secure connectivity to the Sauce Labs cloud.
+          # tunnel-name: ""
 
-    # Identifies the Sauce Labs user who created the specified tunnel, which is required if the user running the tests did not create the tunnel.
-    # tunnel-owner: ""
+          # Identifies the Sauce Labs user who created the specified tunnel, which is required if the user running the tests did not create the tunnel.
+          # tunnel-owner: ""
 
-    # Specifies a test suite to execute by name rather than all suites defined in the config file.
-    # select-suite: ""
+          # Specifies a test suite to execute by name rather than all suites defined in the config file.
+          # select-suite: ""
 
-    # Includes the contents of the suite's console.log in the output of the command regardless of the test results. By default, the console log contents are shown for failed test suites only.
-    # Default: false
-   #  show-console-log: false
+          # Includes the contents of the suite's console.log in the output of the command regardless of the test results. By default, the console log contents are shown for failed test suites only.
+          # Default: false
+        #  show-console-log: false
