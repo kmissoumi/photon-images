@@ -12,8 +12,8 @@ downloadUrl="https://github.com/saucelabs/my-demo-app-rn/releases/download/v${re
 
 saucectlOptions=(--disable-usage-metrics)
 saucectlOptions+=(--region ${SAUCE_REGION})
-[[ -z ${SAUCE_DEBUG} ]] || saucectlOptions+=(--force)                   # force upload
-[[ -z ${SAUCE_DEBUG} ]] || mv .app .app-$(date +'%Y%m%d-%H%M%s')        # force download
+[[ -n ${SAUCE_DEBUG} ]] && saucectlOptions+=(--force)                                                           # force upload
+[[ -n ${SAUCE_DEBUG} && -d ${downloadPath} ]] && mv ${downloadPath} ${downloadPath}-$(date +'%Y%m%d-%H%M%s')    # force download
 
 
 demo_app_sync () {    
