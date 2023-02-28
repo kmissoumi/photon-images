@@ -36,4 +36,9 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            suncup/photon-js:0.0.${{ github.run_id }}
+            suncup/photon-js:0.0.6
+      -
+        name: Run test in photon.
+        uses: saucelabs/saucectl-run-action@v3
+        with:
+          saucectl-version: latest
