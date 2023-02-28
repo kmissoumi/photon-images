@@ -1,0 +1,139 @@
+#!/bin/bash -e
+
+
+
+# check for colima/ventura/arch
+[[ $(uname -m) == "arm64" ]] && options="--platform linux/amd64"
+colima status && [[ ${?} != 1 ]] || colima start --arch aarch64 --mount-type virtiofs --vm-type vz --cpu 8 --memory 16 || printf 'colima status: %s' ${colimaStatus}
+
+# https://github.com/wagoodman/dive
+# https://scribe.rip/trendyol-tech/how-we-reduce-node-docker-image-size-in-3-steps-ff2762b51d5a
+# cd webdriverio/appium-app/best-practices
+# npm install
+# npx wdio test/configs/wdio.ios.sauce.sim.conf.ts --logLevel debug
+# npx wdio webdriverio/appium-app/best-practices/test/configs/wdio.ios.sauce.rdc.conf.ts --logLevel debug 
+
+
+# image deets
+imageRegistry="docker.io"
+accountName="suncup"
+projectName="photon-js"
+
+[[ -z ${imageBuild} ]] && imageBuild="0.0.7"
+imageBase="${imageRegistry}/${accountName}/${projectName}"
+imageURI="${imageBase}:${imageBuild}"
+imageLatest="${imageBase}:latest"
+
+
+image_build () {
+    printf 'building %s\n' ${imageURI}
+    docker build \
+        --platform linux/amd64 \
+        --build-arg SAUCE_USERNAME=${SAUCE_USERNAME} \
+        --build-arg SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
+        --build-arg SAUCE_REGION=${SAUCE_REGION} \
+        --build-arg BUILD_TYPE="docker-local" \
+        --tag ${imageURI} \
+        --tag ${imageLatest} \
+        .
+}
+
+
+image_publish () {
+    docker login
+    docker push ${imageURI}
+}
+
+
+image_inspect () {
+    #lastImage=$(docker images -q --format='{{.ID}}' | head -1)
+    #docker history --human --format "{{.CreatedBy}}: {{.Size}}" ${lastImage}
+    # dive ${imageURI}
+    docker run -it \
+        --platform linux/amd64 --pull always \
+        --env SAUCE_USERNAME=${SAUCE_USERNAME} \
+        --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
+        --env SAUCE_REGION=${SAUCE_REGION} \
+        --env BUILD_TYPE="docker-local" \
+        docker.io/suncup/frank-java:0.0.1 \
+        bash
+}
+
+
+image_run () {
+    #lastImage=$(docker images -q --format='{{.ID}}' | head -1)
+    #docker history --human --format "{{.CreatedBy}}: {{.Size}}" ${lastImage}
+    # dive ${imageURI}
+    docker run -it \
+        --platform linux/amd64 --pull always \
+        --env SAUCE_USERNAME=${SAUCE_USERNAME} \
+        --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
+        --env SAUCE_REGION=${SAUCE_REGION} \
+        --env BUILD_TYPE="ci-standard" \
+        docker.io/suncup/frank-java:0.0.7 \
+        bash
+}
+
+
+image_reset () {
+    docker container prune --force
+    docker image prune --all --force
+    imageList=$(docker images -aq)
+    [[ -z ${imageList} ]] || docker rmi ${imageList}
+}
+
+
+_demo_app_sync () {
+    downloadPath=".app"
+    release="1.3.0"
+    downloadUrl="https://github.com/saucelabs/my-demo-app-rn/releases/download/v${release}"
+    
+    saucectlOptions=(--disable-usage-metrics)
+    saucectlOptions+=(--region ${SAUCE_REGION}) 
+    [[ -z ${SAUCE_DEBUG} ]] || saucectlOptions+=(--force)                   # force upload
+    [[ -z ${SAUCE_DEBUG} ]] || mv .app .app-$(date +'%Y%m%d-%H%M%s')        # force download
+    mkdir -p ${downloadPath}
+
+    appRelease="Android-MyDemoAppRN.1.3.0.build-244.apk"
+    appName="MyDemoAppRN.apk"
+    demo_app_download ${downloadPath} ${appRelease} ${downloadUrl} ${appName}
+    saucectl storage upload ${downloadPath}/${appName} "${saucectlOptions[@]}" 
+
+    appRelease="iOS-Simulator-MyRNDemoApp.1.3.0-162.zip"
+    appName="MyRNDemoApp.zip"
+    demo_app_download ${downloadPath} ${appRelease} ${downloadUrl} ${appName}
+    saucectl storage upload ${downloadPath}/${appName} "${saucectlOptions[@]}" 
+
+    appRelease="iOS-Real-Device-MyRNDemoApp.1.3.0-162.ipa"
+    appName="MyRNDemoApp.ipa"
+    demo_app_download ${downloadPath} ${appRelease} ${downloadUrl} ${appName}
+    saucectl storage upload ${downloadPath}/${appName} "${saucectlOptions[@]}"
+} 
+
+
+demo_app_download () {
+    downloadPath=${1}
+    appRelease=${2}
+    downloadUrl=${3}
+    appName=${4}
+
+    [[ -f ${downloadPath}/${appRelease} ]] || curl --location ${downloadUrl}/${appRelease} --output ${downloadPath}/${appRelease} && \
+        ln -f ${downloadPath}/${appRelease} ${downloadPath}/${appName}
+
+}
+
+
+_demo_app_upload_via_curl () {
+    curl \
+        --form "payload=@./iOS-Simulator-MyRNDemoApp.1.3.0-162.zip" \
+        --form name=MyRNDemoApp.zip \
+        --user "$SAUCE_USERNAME:$SAUCE_ACCESS_KEY"  \
+        'https://api.staging.saucelabs.net/v1/storage/upload'
+}
+
+
+# image_build
+
+# skip publish if no arguments are passed
+# [[ -z ${1} ]] && printf "...Skipped publishing image to registry...\n" || image_publish
+
