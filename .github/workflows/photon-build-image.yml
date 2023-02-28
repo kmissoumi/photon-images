@@ -36,7 +36,8 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            suncup/photon-js:0.0.6
+            suncup/photon-js:${{ GITHUB_RUN_NUMBER }} 
+            suncup/photon-js:latest
       -
         name: Install saucectl
         uses: saucelabs/saucectl-run-action@v3
@@ -50,4 +51,5 @@ jobs:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
           SAUCE_REGION: "us-west-1"
-          BUILD_TYPE: "hosted"
+          BUILD_TYPE: "ci-photon"
+          IMAGE_TAG: {{ GITHUB_RUN_NUMBER }}
