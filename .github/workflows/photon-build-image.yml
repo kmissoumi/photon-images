@@ -38,7 +38,11 @@ jobs:
           tags: |
             suncup/photon-js:0.0.6
       -
-        name: Run test in photon.
+        name: Install saucectl
         uses: saucelabs/saucectl-run-action@v3
         with:
           saucectl-version: latest
+          skip-run: true
+      -
+        name: Run test via Hosted Test Orchestration
+        run: saucectl run --config .sauce/config-webdriver-best-practices.yml
