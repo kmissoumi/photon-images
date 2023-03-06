@@ -1,4 +1,4 @@
-name: java-image
+name: build image for java
 
 on:
   workflow_dispatch:
@@ -50,7 +50,7 @@ jobs:
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-          SAUCE_REGION: ${{ SAUCE_REGION }}
+          SAUCE_REGION: $SAUCE_REGION
           SAUCE_BUILD_TYPE: "ci-photon"
       -
         name: Run test from CI via Docker Image
@@ -59,11 +59,11 @@ jobs:
           --env SAUCE_USERNAME=${SAUCE_USERNAME} \
           --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
           --env SAUCE_REGION=${SAUCE_REGION} \
-          --env SAUCE_BUILD_TYPE="${SAUCE_BUILD_TYPE}" \
+          --env SAUCE_BUILD_TYPE=${SAUCE_BUILD_TYPE} \
           docker.io/suncup/photon-java:0.0.9 \
           mvn -pl best-practice test -Dtest=DesktopTests
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-          SAUCE_REGION: ${{ SAUCE_REGION }}
+          SAUCE_REGION: $SAUCE_REGION
           SAUCE_BUILD_TYPE: "ci-docker"
