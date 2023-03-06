@@ -25,7 +25,7 @@ npm run     --prefix webdriverio/webdriver/best-practices test.saucelabs
     --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
     --env SAUCE_REGION=${SAUCE_REGION} \
     --env SAUCE_BUILD_TYPE="local-docker" \
-    docker.io/suncup/photon-js:0.0.9 \
+    docker.io/suncup/photon-js:0.0.10 \
     npm run --prefix webdriverio/webdriver/best-practices test.saucelabs
 
 

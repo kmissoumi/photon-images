@@ -37,7 +37,7 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-             suncup/photon-java:0.0.9
+             suncup/photon-java:0.0.10
       -
         name: Install saucectl
         uses: saucelabs/saucectl-run-action@v3
@@ -61,7 +61,7 @@ jobs:
             --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
             --env SAUCE_REGION=${SAUCE_REGION} \
             --env SAUCE_BUILD_TYPE=${SAUCE_BUILD_TYPE} \
-            docker.io/suncup/photon-java:0.0.9 \
+            docker.io/suncup/photon-java:0.0.10 \
             mvn -pl best-practice test -Dtest=DesktopTests
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}

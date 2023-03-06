@@ -36,7 +36,7 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-             suncup/photon-js:0.0.9
+             suncup/photon-js:0.0.10
       -
         name: Install saucectl
         uses: saucelabs/saucectl-run-action@v3
@@ -60,7 +60,7 @@ jobs:
             --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
             --env SAUCE_REGION=${SAUCE_REGION} \
             --env SAUCE_BUILD_TYPE="${SAUCE_BUILD_TYPE}" \
-            docker.io/suncup/photon-js:0.0.9 \
+            docker.io/suncup/photon-js:0.0.10 \
             npm run --prefix webdriverio/webdriver/best-practices test.saucelabs
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
