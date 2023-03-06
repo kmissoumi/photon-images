@@ -1,7 +1,9 @@
 import config from './wdio.shared.sauce.conf';
 
-const buildName = `iOS Simulator Native App ${new Date().getTime()}`;
+const buildName = 'iOS Simulator Native App' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Standard') + ' ' + `${new Date().getTime()}`;
 
+
+iOS Native App
 // ===================================================================================
 // Capabilities
 // You can find more about constructing the capabilities for iOS simulator testing here

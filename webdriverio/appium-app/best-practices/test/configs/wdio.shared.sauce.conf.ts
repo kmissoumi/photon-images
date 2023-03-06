@@ -17,6 +17,6 @@ config.region = (process.env.SAUCE_REGION || 'us') as SauceRegions;
 // Services
 // ========
 config.services = (config.services || []).concat('sauce');
-config.buildType = (process.env.BUILD_TYPE || 'standard');
+config.buildType = (process.env.SAUCE_BUILD_TYPE || 'standard');
 
 export default config;

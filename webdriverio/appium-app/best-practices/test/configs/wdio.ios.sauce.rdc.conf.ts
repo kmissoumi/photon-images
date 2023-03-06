@@ -1,6 +1,7 @@
 import config from './wdio.shared.sauce.conf';
 
-const buildName = `iOS Native App ${new Date().getTime()}`;
+const buildName = 'iOS Native App' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Standard') + ' ' + `${new Date().getTime()}`;
+
 const osVersions = ['13', '14'];
 const getRandomOsVersion = (versions: string[]): string =>
   versions[Math.floor(Math.random() * versions.length)];

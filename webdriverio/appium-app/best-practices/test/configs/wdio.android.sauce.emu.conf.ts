@@ -1,6 +1,6 @@
 import config from './wdio.shared.sauce.conf';
 
-const buildName = `Android Emulator Native App ${new Date().getTime()}`;
+const buildName = 'Android Emulator Native App' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Standard') + ' ' + `${new Date().getTime()}`;
 
 // ===================================================================================
 // Capabilities

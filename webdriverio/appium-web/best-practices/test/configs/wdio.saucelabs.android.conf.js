@@ -1,7 +1,8 @@
 const { config } = require('./wdio.shared.sauce.mobile.conf');
-const build = `Best Practices: Android Chrome Appium '${
+const build = 'Best Practices: Android Chrome Appium' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Standard') + ' ' + `${
   config.appiumVersion
-}' build-${new Date().getTime()}`;
+}` + ' ' + `${new Date().getTime()}`;
+
 
 // ============
 // Capabilities
