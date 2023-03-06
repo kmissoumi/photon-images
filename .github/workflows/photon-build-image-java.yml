@@ -1,4 +1,4 @@
-name: js image
+name: pipeline
 
 on:
   workflow_dispatch:
@@ -31,12 +31,13 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
+          file: Dockerfile-Java
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: linux/amd64
           push: true
           tags: |
-             suncup/photon-js:0.0.9
+             suncup/photon-java:0.0.9
       -
         name: Install saucectl
         uses: saucelabs/saucectl-run-action@v3
@@ -45,7 +46,7 @@ jobs:
           skip-run: true
       -
         name: Run test from CI via Hosted Test Orchestration
-        run: saucectl run --config .sauce/config-webdriver-best-practices.yml
+        run: saucectl run --config .sauce/java-demo.yml
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
@@ -59,8 +60,8 @@ jobs:
           --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
           --env SAUCE_REGION=${SAUCE_REGION} \
           --env BUILD_TYPE="${BUILD_TYPE}" \
-          docker.io/suncup/photon-js:0.0.9 \
-          npm run --prefix webdriverio/webdriver/best-practices test.saucelabs
+          docker.io/suncup/photon-java:0.0.9 \
+          mvn -pl best-practice test -Dtest=DesktopTests
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
