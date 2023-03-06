@@ -53,14 +53,15 @@ jobs:
           SAUCE_BUILD_TYPE: ${SAUCE_BUILD_TYPE}
       -
         name: Run test from CI via Docker Image
-        run: docker run \
-          --platform linux/amd64 --pull always \
-          --env SAUCE_USERNAME=${SAUCE_USERNAME} \
-          --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
-          --env SAUCE_REGION=${SAUCE_REGION} \
-          --env SAUCE_BUILD_TYPE="${SAUCE_BUILD_TYPE}" \
-          docker.io/suncup/photon-js:0.0.9 \
-          npm run --prefix webdriverio/webdriver/best-practices test.saucelabs
+        run: |
+          docker run \
+            --platform linux/amd64 --pull always \
+            --env SAUCE_USERNAME=${SAUCE_USERNAME} \
+            --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
+            --env SAUCE_REGION=${SAUCE_REGION} \
+            --env SAUCE_BUILD_TYPE="${SAUCE_BUILD_TYPE}" \
+            docker.io/suncup/photon-js:0.0.9 \
+            npm run --prefix webdriverio/webdriver/best-practices test.saucelabs
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
