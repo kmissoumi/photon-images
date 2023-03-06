@@ -15,7 +15,7 @@ ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 COPY ${contextPath}/pom.xml ${basePath}/pom.xml
 RUN mvn dependency:resolve
 
-COPY ${contextPath}/src ${basePath}/src/.
+COPY ${contextPath}/best-practice/src ${basePath}/src/.
 RUN mvn test-compile
 RUN mvn test; exit 0
 RUN mvn -pl best-practice test -Dtest=DesktopTests; exit 0
