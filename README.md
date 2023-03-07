@@ -1,6 +1,6 @@
 ```sh
 
-# Tested on macOS and Windows Linux Subsystem
+# Tested on macOS and Linux Subsystem for Windows
 
 # set the env
 export SAUCE_USERNAME=""            # string, sauce labs username
@@ -14,8 +14,8 @@ env|grep SAUCE
 npm install --prefix webdriverio/webdriver/best-practices
 npm run     --prefix webdriverio/webdriver/best-practices test.saucelabs
 
-# run via localhost and debug
-# cd webdriverio/webdriver/best-practices
+# run via localhost debug
+# cd webdriverio/webdriver/best-practices && npm install
 # npx wdio test/configs/wdio.saucelabs.conf.ts --logLevel debug
 
 # run via docker image
@@ -24,15 +24,17 @@ npm run     --prefix webdriverio/webdriver/best-practices test.saucelabs
     --env SAUCE_USERNAME=${SAUCE_USERNAME} \
     --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
     --env SAUCE_REGION=${SAUCE_REGION} \
-    --env SAUCE_BUILD_TYPE="local-docker" \
-    docker.io/suncup/photon-js:0.0.10 \
+    --env SAUCE_BUILD_TYPE="Local Docker" \
+    docker.io/suncup/photon-js:0.0.11 \
     npm run --prefix webdriverio/webdriver/best-practices test.saucelabs
 
 
-# run via hosted orchestration, same docker image, same command, different local
-# ACL message could mean your org is not authorized for the beta
+# run via hosted orchestration
+# same docker image, same command, different execution location
+#
+# ACL error message could mean your org is not authorized to beta programme
+#
 saucectl run --config .sauce/config-webdriver-best-practices.yml
-
 ```
 
 

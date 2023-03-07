@@ -3,10 +3,10 @@ kind: imagerunner
 region: ${SAUCE_REGION}
 suites:
   - name: photon-js-webdriver
-    image: suncup/photon-js:0.0.10
+    image: suncup/photon-js:0.0.11
     entrypoint: npm run --prefix webdriverio/webdriver/best-practices test.saucelabs
     env:
       SAUCE_USERNAME: ${SAUCE_USERNAME}
       SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
       SAUCE_REGION: ${SAUCE_REGION}
-      SAUCE_BUILD_TYPE: "ci-photon"
+      SAUCE_BUILD_TYPE: "CI Photon"
