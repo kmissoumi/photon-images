@@ -30,10 +30,11 @@ public class Endpoints {
      * @return URL for Real Device Hub
      */
     public static URL getRealDevicesHub() throws MalformedURLException {
-        String endpoint = System.getenv("SAUCE_ENDPOINT");
-        if(endpoint == null) {
+        String region = System.getenv("SAUCE_REGION");
+        if(region == null) {
             return new URL("https://ondemand.us-west-1.saucelabs.com/wd/hub");
-        }
-        return new URL(endpoint);
+        } else {
+            return new URL("https://ondemand." + System.getenv("SAUCE_REGION") + ".saucelabs.com/wd/hub");
+            }
     }
 }

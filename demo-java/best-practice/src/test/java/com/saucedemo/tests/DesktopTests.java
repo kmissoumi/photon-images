@@ -86,7 +86,8 @@ public class DesktopTests extends SauceBaseTest {
         if (sauceOptions.sauce().getName() == null) {
             sauceOptions.sauce().setName(testName.getMethodName());
         }
-        sauceOptions.sauce().setBuild(System.getenv("SAUCE_BUILD"));
+        sauceOptions.sauce().setBuild("Java Best Practice Demo Desktop Browsers" + " " + System.getenv("SAUCE_BUILD_TYPE"));
+
         session = new SauceSession(sauceOptions);
         session.setDataCenter(getDataCenter());
         // enable switching to a different endpoint
