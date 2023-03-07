@@ -13,11 +13,11 @@ WORKDIR ${basePath}
 
 ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 
-COPY ./demo-java/pom.xml ${basePath}/pom.xml
-COPY ./demo-java/best-practice/pom.xml ${basePath}/best-practice/pom.xml
+COPY demo-java/pom.xml ${basePath}/pom.xml
+COPY demo-java/best-practice/pom.xml ${basePath}/best-practice/pom.xml
 RUN mvn de.qaware.maven:go-offline-maven-plugin:resolve-dependencies
 
-COPY ./demo-java ${basePath}/.
+COPY demo-java/ ${basePath}/
 
 ENV OTEL_SDK_DISABLED=false
 ENV LANG=en_US.UTF-8
