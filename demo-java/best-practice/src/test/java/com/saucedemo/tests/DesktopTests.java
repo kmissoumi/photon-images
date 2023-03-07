@@ -21,6 +21,8 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.time.Instant;
+
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -85,8 +87,8 @@ public class DesktopTests extends SauceBaseTest {
         SauceOptions sauceOptions = createSauceOptions();
         if (sauceOptions.sauce().getName() == null) {
             sauceOptions.sauce().setName(testName.getMethodName());
-        }
-        sauceOptions.sauce().setBuild("Java Best Practice Demo Desktop Browsers" + " " + System.getenv("SAUCE_BUILD_TYPE"));
+        }        
+        sauceOptions.sauce().setBuild("Java Best Practice Demo Desktop Browsers" + " " + System.getenv("SAUCE_BUILD_TYPE") + " " + Instant.now().toEpochMilli());
 
         session = new SauceSession(sauceOptions);
         session.setDataCenter(getDataCenter());
