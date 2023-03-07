@@ -3,7 +3,7 @@ FROM maven:3-jdk-8-alpine
 RUN apk update && apk add curl bash && rm -rf /var/cache/apk/*
 
 ARG basePath="/usr/build"
-ARG contextPath="demo-java"
+ARG contextPath="./demo-java"
 ARG SAUCE_USERNAME
 ARG SAUCE_ACCESS_KEY
 ARG SAUCE_REGION
