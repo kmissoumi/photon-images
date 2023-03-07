@@ -13,8 +13,8 @@ WORKDIR ${basePath}
 
 ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 
-COPY ${contextPath}/pom.xml ${basePath}/pom.xml
-COPY ${contextPath}/best-practice/pom.xml ${basePath}/best-practice/pom.xml
+COPY demo-java/pom.xml ${basePath}/pom.xml
+COPY demo-java/best-practice/pom.xml ${basePath}/best-practice/pom.xml
 RUN mvn de.qaware.maven:go-offline-maven-plugin:resolve-dependencies
 
 COPY ${contextPath}/best-practice ${basePath}/best-practice
