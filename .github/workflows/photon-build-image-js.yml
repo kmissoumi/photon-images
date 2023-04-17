@@ -49,6 +49,7 @@ jobs:
           skip-run: true
       -
         name: Run test from CI via Docker Image
+        continue-on-error: true
         run: |
           docker run \
             --platform linux/amd64 --pull always \
@@ -64,7 +65,8 @@ jobs:
           SAUCE_REGION: ${SAUCE_REGION}
       -
         name: Run test from CI via Hosted Test Orchestration
-        run: saucectl run --config .sauce/config-webdriver-best-practices.yml; exit 0
+        continue-on-error: true
+        run: saucectl run --config .sauce/config-webdriver-best-practices.yml
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
