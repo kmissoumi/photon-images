@@ -1,5 +1,7 @@
 package com.saucedemo.tests;
 
+import com.saucedemo.AbstractTestBase;
+//import com.saucedemo.MobileTestsBase;
 import com.saucedemo.pages.LoginPage;
 import com.saucedemo.pages.ProductsPage;
 import com.saucelabs.saucebindings.Browser;
@@ -27,6 +29,9 @@ import java.time.Instant;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+
+
+
 /** Desktop Tests. */
 @RunWith(Parameterized.class)
 public class DesktopTests extends SauceBaseTest {
@@ -44,10 +49,10 @@ public class DesktopTests extends SauceBaseTest {
     public static Collection<Object[]> crossBrowserData() {
         return Arrays.asList(new Object[][] {
                 { Browser.CHROME, "latest", SaucePlatform.WINDOWS_10 },
-                // { Browser.CHROME, "latest-1", SaucePlatform.WINDOWS_10 },
-                // { Browser.SAFARI, "latest", SaucePlatform.MAC_MOJAVE },
-                // { Browser.CHROME, "latest", SaucePlatform.MAC_MOJAVE }
-                /*
+                { Browser.CHROME, "latest-1", SaucePlatform.WINDOWS_10 },
+                { Browser.SAFARI, "latest", SaucePlatform.MAC_MOJAVE },
+                { Browser.CHROME, "latest", SaucePlatform.MAC_MOJAVE },
+                
                          // Duplication below for demo purposes of massive parallelization
                          {Browser.CHROME, "latest", SaucePlatform.WINDOWS_10},
                          {Browser.CHROME, "latest-1", SaucePlatform.WINDOWS_10},
@@ -56,7 +61,8 @@ public class DesktopTests extends SauceBaseTest {
                          {Browser.CHROME, "latest", SaucePlatform.WINDOWS_10},
                          {Browser.CHROME, "latest-1", SaucePlatform.WINDOWS_10},
                          {Browser.SAFARI, "latest", SaucePlatform.MAC_MOJAVE},
-                         {Browser.CHROME, "latest", SaucePlatform.MAC_MOJAVE},
+                         {Browser.CHROME, "latest", SaucePlatform.MAC_MOJAVE}
+                         /*
                          {Browser.CHROME, "latest", SaucePlatform.WINDOWS_10},
                          {Browser.CHROME, "latest-1", SaucePlatform.WINDOWS_10},
                          {Browser.SAFARI, "latest", SaucePlatform.MAC_MOJAVE},
@@ -88,12 +94,19 @@ public class DesktopTests extends SauceBaseTest {
         if (sauceOptions.sauce().getName() == null) {
             sauceOptions.sauce().setName(testName.getMethodName());
         }        
-        sauceOptions.sauce().setBuild("Java Best Practice Demo Desktop Browsers" + " " + System.getenv("SAUCE_BUILD_TYPE") + " " + Instant.now().toEpochMilli());
+        sauceOptions.sauce().setBuild("Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build") + " " + Instant.now().toEpochMilli());
+        //sauceOptions.sauce().setBuild("Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build"));
+
+        //sauceOptions.setCapability("build", buildName);
 
         session = new SauceSession(sauceOptions);
         session.setDataCenter(getDataCenter());
         // enable switching to a different endpoint
-        String endpoint = System.getenv("SAUCE_ENDPOINT");        
+
+        //String endpoint = "https://ondemand." + System.getenv().getOrDefault("SAUCE_REGION", "us-west-1") + ".saucelabs.com:443/wd/hub";
+        // broken for eu-central-1
+        String endpoint = "https://ondemand." + "us-west-1" + ".saucelabs.com:443/wd/hub";
+
         if(endpoint != null) {
             try {
                 this.session.setSauceUrl(new URL(endpoint));
@@ -101,6 +114,7 @@ public class DesktopTests extends SauceBaseTest {
                 throw new InvalidArgumentException("Invalid URL");
             }
         }
+        
         driver = session.start();
     }
 

@@ -2,11 +2,10 @@ apiVersion: v1alpha
 kind: imagerunner
 region: ${SAUCE_REGION}
 suites:
-  - name: photon-java-webdriver
+  - name: photon-java
     image: suncup/photon-java:latest
     entrypoint: mvn -pl best-practice test -Dtest=DesktopTests
     env:
       SAUCE_USERNAME: ${SAUCE_USERNAME}
       SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
       SAUCE_REGION: ${SAUCE_REGION}
-      SAUCE_BUILD_TYPE: "CI Photon"

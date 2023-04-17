@@ -9,12 +9,14 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 /**
  * All Tests need to extend this class to get the correct behavior.
  */
 public abstract class AbstractTestBase {
-    //public static final String buildName = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-    public static final String buildName = "Java Best Practice Demo Desktop Browsers" + " " + System.getenv("SAUCE_BUILD_TYPE");
+    //public static final String buildName = "Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build")  + " " + System.currentTimeMillis();
+    public static final String buildName = "Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build");
+
 
     @Rule
     public TestName testName = new TestName() {
@@ -27,7 +29,9 @@ public abstract class AbstractTestBase {
 
     protected static final String SAUCE_USERNAME = System.getenv("SAUCE_USERNAME");
     protected static final String SAUCE_ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
-    protected static final String SCREENER_API_KEY = System.getenv("SCREENER_API_KEY");
+    protected static final String SAUCE_VISUAL_API_KEY = System.getenv("SAUCE_VISUAL_API_KEY");
+    //protected static final String buildName = "Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build")  + " " + System.currentTimeMillis();
+
     protected RemoteWebDriver driver;
 
     /**
