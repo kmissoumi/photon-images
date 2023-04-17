@@ -26,13 +26,16 @@ ARG SAUCE_ACCESS_KEY
 ARG SAUCE_REGION
 ARG SAUCE_BUILD_TYPE
 ARG basePath="/usr/build"
+ARG demoJava="./demo-java"
 
 ENV OTEL_SDK_DISABLED=false
 ENV LANG=en_US.UTF-8
 
 
-COPY demo-java ${basePath}
-COPY --from=builder ${basePath}/demo-java/best-practices/target  ${basePath}/demo-java/best-practices/target
+WORKDIR ${basePath}
+
+COPY ${demoJava} ${basePath}/${demdemoJavaoPath}
+COPY --from=builder ${basePath}/${demoJava}/best-practices/target  ${basePath}/{demoJava}/best-practices/target
 
 RUN mvn test-compile
 #RUN mvn test; exit 0
