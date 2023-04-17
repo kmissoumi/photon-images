@@ -14,7 +14,7 @@ ENV OTEL_SDK_DISABLED=false
 ENV LANG=en_US.UTF-8
 ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 
-WORKDIR ${basePath}
+WORKDIR ${basePath}/${demoPath}
 
 COPY ${demoPath} ${basePath}/${demoPath}
 
