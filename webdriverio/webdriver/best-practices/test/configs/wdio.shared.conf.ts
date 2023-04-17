@@ -16,7 +16,7 @@ export const config: WebdriverIO.Config = {
   // ============
   // Capabilities
   // ============
-  maxInstances: 100,
+  maxInstances: 20,
   // capabilities can be found in the `wdio.local.chrome.conf.ts` or `wdio.saucelabs.conf.ts`
   capabilities: [],
   // ===================
