@@ -66,7 +66,7 @@ jobs:
       -
         name: Run test from CI via Hosted Test Orchestration
         continue-on-error: true
-        run: saucectl run --config .sauce/demo-java.yml
+        run: saucectl run --config .sauce/config-demo-java.yml
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
