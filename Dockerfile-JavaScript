@@ -34,10 +34,10 @@ ARG basePath="/usr/build"
 
 WORKDIR ${basePath}
 
+COPY ${webdriverPath} ${basePath}/${webdriverPath}
 COPY ${appiumAppPath} ${basePath}/${appiumAppPath}
 COPY ${appiumWebPath} ${basePath}/${appiumWebPath}
-COPY ${webdriverPath} ${basePath}/${webdriverPath}
 
+COPY --from=builder ${basePath}/${webdriverPath}/node_modules ${basePath}/${webdriverPath}/node_modules
 COPY --from=builder ${basePath}/${appiumAppPath}/node_modules ${basePath}/${appiumAppPath}/node_modules
 COPY --from=builder ${basePath}/${appiumWebPath}/node_modules ${basePath}/${appiumWebPath}/node_modules
-COPY --from=builder ${basePath}/${webdriverPath}/node_modules ${basePath}/${webdriverPath}/node_modules

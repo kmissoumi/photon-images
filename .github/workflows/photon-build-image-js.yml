@@ -1,4 +1,4 @@
-name: build image for js
+name: Build & Test Image for Webdriver Demo
 
 on:
   workflow_dispatch:
@@ -31,6 +31,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
+          file: Dockerfile-JavaScript
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: linux/amd64
