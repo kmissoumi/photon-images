@@ -12,12 +12,12 @@ ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 
 COPY ${demoPath}/pom.xml                ${basePath}/${demoPath}/pom.xml
 COPY ${demoPath}/best-practice/pom.xml  ${basePath}/${demoPath}/best-practice/pom.xml
-RUN mvn de.qaware.maven:go-offline-maven-plugin:resolve-dependencies
+#RUN mvn de.qaware.maven:go-offline-maven-plugin:resolve-dependencies
+#mvn dependency:go-offline
 
 
 # now with less build time
 # install steps cached and kept separate from test code
-
 FROM maven:3-jdk-8-alpine
 
 RUN apk update && apk add curl bash && rm -rf /var/cache/apk/*
@@ -36,7 +36,7 @@ ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 WORKDIR ${basePath}
 
 COPY                ${demoPath}                                     ${basePath}/${demoPath}
-COPY --from=builder ${basePath}/${demoPath}/best-practices/target   ${basePath}/${demoPath}/best-practices/target
+#COPY --from=builder ${basePath}/${demoPath}/best-practices/target   ${basePath}/${demoPath}/best-practices/target
 
 RUN mvn test-compile
 #RUN mvn test; exit 0
