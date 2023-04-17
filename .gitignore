@@ -36,4 +36,6 @@ v6/
 **/*native-screenshot.png
 **/*flutter-screenshot.png
 
-**/.app
+#
+**/.app*
+.env

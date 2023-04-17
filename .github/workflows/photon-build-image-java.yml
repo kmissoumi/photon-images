@@ -1,4 +1,4 @@
-name: build image for java
+name: Build & Test Image for Java Demo
 
 on:
   workflow_dispatch:
@@ -37,10 +37,13 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-             suncup/photon-java:0.0.12
+             suncup/photon-java:latest
+             suncup/photon-java:0.1.${{ github.run_number }}
       -
         name: Install saucectl
         uses: saucelabs/saucectl-run-action@v3
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           saucectl-version: latest
           skip-run: true
@@ -61,7 +64,7 @@ jobs:
             --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
             --env SAUCE_REGION=${SAUCE_REGION} \
             --env SAUCE_BUILD_TYPE="CI Docker" \
-            docker.io/suncup/photon-java:0.0.12 \
+            docker.io/suncup/photon-java:latest \
             mvn -pl best-practice test -Dtest=DesktopTests
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}

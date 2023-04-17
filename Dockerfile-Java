@@ -1,4 +1,4 @@
-FROM maven:3-jdk-8-alpine
+FROM maven:3-jdk-8-alpine AS builder
 
 RUN apk update && apk add curl bash && rm -rf /var/cache/apk/*
 
@@ -13,14 +13,19 @@ WORKDIR ${basePath}
 
 ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 
-COPY demo-java/pom.xml ${basePath}/pom.xml
-COPY demo-java/best-practice/pom.xml ${basePath}/best-practice/pom.xml
+COPY ./demo-java/pom.xml ${basePath}/pom.xml
+COPY ./demo-java/best-practice/pom.xml ${basePath}/best-practice/pom.xml
 RUN mvn de.qaware.maven:go-offline-maven-plugin:resolve-dependencies
 
-COPY demo-java ${basePath}
+
+FROM maven:3-jdk-8-alpine
 
 ENV OTEL_SDK_DISABLED=false
 ENV LANG=en_US.UTF-8
+
+COPY demo-java ${basePath}
+COPY --from=builder ${basePath}/demo-java/best-practices/target  ${basePath}/demo-java/best-practices/target
+
 
 RUN mvn test-compile
 #RUN mvn test; exit 0
