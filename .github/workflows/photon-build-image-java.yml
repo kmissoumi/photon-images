@@ -37,8 +37,8 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-             suncup/photon-java:latest
              suncup/photon-java:0.1.${{ github.run_number }}
+             suncup/photon-java:latest
       -
         name: Install saucectl
         uses: saucelabs/saucectl-run-action@v3

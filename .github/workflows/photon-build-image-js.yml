@@ -37,8 +37,8 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-             suncup/photon-js:latest
-             suncup/photon-js:0.1.${{ github.run_number }}
+            suncup/photon-js:0.1.${{ github.run_number }}
+            suncup/photon-js:latest
       -
         name: Install saucectl
         uses: saucelabs/saucectl-run-action@v3
@@ -47,14 +47,6 @@ jobs:
         with:
           saucectl-version: latest
           skip-run: true
-      -
-        name: Run test from CI via Hosted Test Orchestration
-        run: saucectl run --config .sauce/config-webdriver-best-practices.yml
-        env:
-          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
-          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-          SAUCE_REGION: ${SAUCE_REGION}
-          SAUCE_BUILD_TYPE: "CI Photon"
       -
         name: Run test from CI via Docker Image
         run: |
@@ -70,3 +62,11 @@ jobs:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
           SAUCE_REGION: ${SAUCE_REGION}
+      -
+        name: Run test from CI via Hosted Test Orchestration
+        run: saucectl run --config .sauce/config-webdriver-best-practices.yml
+        env:
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+          SAUCE_REGION: ${SAUCE_REGION}
+          SAUCE_BUILD_TYPE: "CI Photon"
