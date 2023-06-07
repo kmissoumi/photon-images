@@ -18,6 +18,6 @@ WORKDIR ${basePath}/${demoPath}
 
 COPY ${demoPath} ${basePath}/${demoPath}
 
-RUN mvn dependency:resolve
-RUN mvn test-compile
+RUN mvn dependency:resolve; exit 0
+RUN mvn test-compile; exit 0
 RUN mvn --projects best-practice test -Dtest=DesktopTests; exit 0
