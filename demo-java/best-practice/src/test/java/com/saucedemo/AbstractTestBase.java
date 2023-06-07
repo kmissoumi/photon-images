@@ -15,7 +15,7 @@ import java.util.Date;
  */
 public abstract class AbstractTestBase {
     //public static final String buildName = "Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build")  + " " + System.currentTimeMillis();
-    public static final String buildName = "Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build");
+    //public static final String buildName = "Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build");
 
 
     @Rule

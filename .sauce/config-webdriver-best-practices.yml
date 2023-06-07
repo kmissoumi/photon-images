@@ -4,6 +4,8 @@ region: ${SAUCE_REGION}
 suites:
   - name: photon-js-webdriver
     image: suncup/photon-js:latest
+    resourceProfile: c3m3
+    workload: webdriver
     entrypoint: npm run --prefix webdriverio/webdriver/best-practices test.saucelabs
     env:
       SAUCE_USERNAME: ${SAUCE_USERNAME}
