@@ -47,7 +47,7 @@ config.capabilities = ['current_major', 'previous_major'].map(
       build: buildName,
       tags: ['demo', 'js'],
       // iOS 15 needs Appium `1.22.0` or higher
-      appiumVersion: osVersion === '15.0' ? '1.22.0' : '1.21.0',
+      // appiumVersion: osVersion === '15.0' ? '1.22.0' : '1.21.0',
     },
   })
 );
