@@ -30,11 +30,11 @@ In this repository, you will find a cohesive Greybox (we have some insight into 
 
 ## ⚙️Setup
 
-* See main [README](../README.md) 
+* See the main [README](../README.md) 
 
 ## Running all tests
 
-* Run all the tests inside of the `best-practice` directory
+* Run all the tests inside the `best-practice` directory
 
 ```
 cd best-practice 

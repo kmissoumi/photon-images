@@ -11,7 +11,7 @@ This folder contains best practices for WebdriverIO Native App testing:
 It:
 
 - provides a rich set of helpers for Gestures, deep linking and element interactions
-- provides some best practices for handling the keyboard and scroll to elements
+- provides some best practices for handling keyboard/scroll to elements
 - and many more
 
 ## Install dependencies
@@ -20,7 +20,7 @@ You can install all dependencies by running the following command
 
     npm install
 
-This will install all needed dependencies that are listed in the `package.json`-file
+This will install all needed dependencies that are listed in the `package.json` file.
 
 > NOTE: Make sure you are in the folder `webdriverio/appium-app/best-practices` when you execute this command
 

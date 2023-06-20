@@ -6,7 +6,7 @@ You can install all dependencies by running the following command
 
     npm install
 
-This will install all needed dependencies that are listed in the `package.json`-file
+This will install all needed dependencies that are listed in the `package.json` file.
 
 > NOTE: Make sure you are in the folder `webdriverio/appium-web/best-practices` when you execute this command
 

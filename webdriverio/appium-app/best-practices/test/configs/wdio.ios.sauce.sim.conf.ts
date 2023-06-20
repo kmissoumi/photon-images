@@ -3,7 +3,7 @@ import config from './wdio.shared.sauce.conf';
 const buildName = 'WebdriverIO Appium iOS Simulator App' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Local') + ' ' + `${new Date().getTime()}`;
 
 
-iOS Native App
+// iOS Native App
 // ===================================================================================
 // Capabilities
 // You can find more about constructing the capabilities for iOS simulator testing here
@@ -45,10 +45,9 @@ config.capabilities = ['current_major', 'previous_major'].map(
     // https://www.w3.org/TR/webdriver1/#dfn-extension-capability
     'sauce:options': {
       build: buildName,
-      tags: [ config.buildType, 'demo', 'js'],
+      tags: ['demo', 'js'],
       // iOS 15 needs Appium `1.22.0` or higher
       appiumVersion: osVersion === '15.0' ? '1.22.0' : '1.21.0',
-      tags: [ config.tags ],
     },
   })
 );

@@ -41,7 +41,7 @@ config.capabilities = [
     // https://www.w3.org/TR/webdriver1/#dfn-extension-capability
     'sauce:options': {
       build: buildName,
-      tags: [ config.buildType, 'demo', 'js'],
+      tags: ['demo', 'js'],
       // We don't want touchID or image injection to be enabled for now
       allowTouchIdEnroll: false,
       // @ts-ignore

@@ -6,7 +6,7 @@ You can install all dependencies by running the following command
 
     npm install
 
-This will install all needed dependencies that are listed in the `package.json`-file
+This will install all needed dependencies that are listed in the `package.json` file.
 
 > NOTE: Make sure you are in the folder `webdriverio/webdriver/best-practices` when you execute this command
 
@@ -15,7 +15,7 @@ You can run the tests on your local machine, the only thing you need to have is 
 
     npm run test.local
 
-It will run all tests in *headless*-mode, meaning you will not see a browser starting, but the logs will look like this
+It will run all tests in *headless* mode, meaning you will not see a browser starting, but the logs will look like this
 
 <details>
     <summary>Click to expand and see the logs</summary>
@@ -143,13 +143,9 @@ Spec Files:      8 passed, 8 total (100% completed) in 00:00:19
 </details>
 
 ## Run tests on Sauce Labs
-You can run your tests on Sauce Labs US DC with this command
+You can run your tests on Sauce Labs
 
-    npm run test.saucelabs.us
-
-You can run your tests on Sauce Labs EU DC with this command
-
-    npm run test.saucelabs.eu
+    npm run test.saucelabs
 
 It will spin up multiple browsers which you can find [here](test/configs/wdio.saucelabs.conf.ts).
 
