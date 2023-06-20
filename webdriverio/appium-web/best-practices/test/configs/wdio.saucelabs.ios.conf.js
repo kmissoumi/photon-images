@@ -1,7 +1,6 @@
 const { config } = require('./wdio.shared.sauce.mobile.conf');
-const build = 'Best Practices: iOS Safari Appium' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Standard') + ' ' + `${
-  config.appiumVersion
-}` + ' ' + `${new Date().getTime()}`;
+const build = 'WebdriverIO Appium iOS Web' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Local') + ' ' + `${new Date().getTime()}`;
+
 
 // ============
 // Capabilities
@@ -11,7 +10,7 @@ const build = 'Best Practices: iOS Safari Appium' + ' ' + (process.env.SAUCE_BUI
 //
 // For configuring a Simulator please check
 // https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
-config.capabilities = ['16.1'].map((iOSVersion) => ({
+config.capabilities = ['current_major'].map((iOSVersion) => ({
   // All vendor specific, in this case Appium capabilities, should be
   // put in vendor prefixed options, see
   // https://www.w3.org/TR/webdriver1/#dfn-extension-capability
@@ -19,7 +18,7 @@ config.capabilities = ['16.1'].map((iOSVersion) => ({
   // http://appium.io/docs/en/writing-running-appium/caps/
   // should be prefixed with `appium:{capability-name}`
   'appium:platformVersion': iOSVersion,
-  'appium:deviceName': 'iPhone 14 Simulator',
+  'appium:deviceName': 'iPhone Instant Simulator',
   'appium:automationName': 'XCUITest',
   // For the W3C capabilities, please check
   // https://www.w3.org/TR/webdriver1/#capabilities

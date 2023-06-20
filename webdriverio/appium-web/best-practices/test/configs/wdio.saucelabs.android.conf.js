@@ -1,7 +1,5 @@
 const { config } = require('./wdio.shared.sauce.mobile.conf');
-const build = 'Best Practices: Android Chrome Appium' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Standard') + ' ' + `${
-  config.appiumVersion
-}` + ' ' + `${new Date().getTime()}`;
+const build = 'WebdriverIO Appium Android Web' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Local') + ' ' + `${new Date().getTime()}`;
 
 
 // ============

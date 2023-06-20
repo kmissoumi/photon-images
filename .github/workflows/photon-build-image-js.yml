@@ -48,7 +48,7 @@ jobs:
           saucectl-version: latest
           skip-run: true
       -
-        name: Run test from CI via Docker Image
+        name: Run test from CI via Docker
         continue-on-error: true
         run: |
           docker run \
@@ -56,9 +56,9 @@ jobs:
             --env SAUCE_USERNAME=${SAUCE_USERNAME} \
             --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
             --env SAUCE_REGION=${SAUCE_REGION} \
-            --env SAUCE_BUILD_TYPE="CI Docker" \
+            --env SAUCE_BUILD_TYPE="Docker" \
             docker.io/suncup/photon-js:latest \
-            npm run --prefix webdriverio/webdriver/best-practices test.saucelabs
+            npm run --prefix webdriverio/webdriver/best-practices test.saucelabs.v2
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
@@ -66,7 +66,7 @@ jobs:
       -
         name: Run test from CI via Hosted Test Orchestration
         continue-on-error: true
-        run: saucectl run --config .sauce/config-webdriver-best-practices.yml
+        run: saucectl run --config .sauce/config-wdio-webdriver-best-practices.yml
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}

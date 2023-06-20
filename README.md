@@ -12,21 +12,21 @@ env|grep SAUCE
 
 # run via localhost
 npm install --prefix webdriverio/webdriver/best-practices
-npm run     --prefix webdriverio/webdriver/best-practices test.saucelabs
+npm run     --prefix webdriverio/webdriver/best-practices test.saucelabs.v2
 
 # run via localhost debug
 # cd webdriverio/webdriver/best-practices && npm install
-# npx wdio test/configs/wdio.saucelabs.conf.ts --logLevel debug
+# npx wdio test/configs/wdio.saucelabs.v2.conf.ts --logLevel debug
 
 # run via docker image
- docker run \
+docker run \
     --platform linux/amd64 --pull always \
     --env SAUCE_USERNAME=${SAUCE_USERNAME} \
     --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
     --env SAUCE_REGION=${SAUCE_REGION} \
-    --env SAUCE_BUILD_TYPE="Local Docker" \
+    --env SAUCE_BUILD_TYPE="Docker" \
     docker.io/suncup/photon-js:latest \
-    npm run --prefix webdriverio/webdriver/best-practices test.saucelabs
+    npm run --prefix webdriverio/webdriver/best-practices test.saucelabs.v2
 
 
 # run via hosted orchestration
@@ -34,7 +34,7 @@ npm run     --prefix webdriverio/webdriver/best-practices test.saucelabs
 #
 # ACL error message could mean your org is not authorized to beta programme
 #
-saucectl run --config .sauce/config-webdriver-best-practices.yml
+saucectl run --config .sauce/config-wdio-webdriver-best-practices.yml
 ```
 
 
