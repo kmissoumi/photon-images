@@ -28,7 +28,7 @@ This will install all needed dependencies that are listed in the `package.json`-
 
 You can download the used apps from [here](https://github.com/saucelabs/my-demo-app-rn/releases/). Make sure you rename the apps to:
 
-- Android Emulators / Real Devices: `Android-MyDemoAppRN.*.*.*.build-***.apk` => `Android.MyDemoAppRN.apk`
+- Android Emulators / Real Devices: `Android-MyDemoAppRN.*.*.*.build-***.apk` => `MyDemoAppRN.apk`
 - iOS Real Devices: `iOS-Real-Device-MyRNDemoApp.*.*.*-*.ipa` => `MyRNDemoApp.ipa`
 - iOS Simulators: `iOS-Simulator-MyRNDemoApp.*.*.*-*.zip` => `MyRNDemoApp.zip`
 

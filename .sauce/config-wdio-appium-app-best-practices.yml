@@ -1,0 +1,44 @@
+apiVersion: v1alpha
+kind: imagerunner
+region: ${SAUCE_REGION}
+suites:
+  - name: photon-js-webdriver-appium-app-android-emu
+    image: suncup/photon-js:latest
+    resourceProfile: c3m3
+    workload: webdriver
+    entrypoint: npm run --prefix webdriverio/appium-app/best-practices test.saucelabs.android.emu
+    env:
+      SAUCE_USERNAME: ${SAUCE_USERNAME}
+      SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
+      SAUCE_REGION: ${SAUCE_REGION}
+      SAUCE_BUILD_TYPE: Orchestrate
+  - name: photon-js-webdriver-appium-app-ios-sim
+    image: suncup/photon-js:latest
+    resourceProfile: c3m3
+    workload: webdriver
+    entrypoint: npm run --prefix webdriverio/appium-app/best-practices test.saucelabs.ios.sim
+    env:
+      SAUCE_USERNAME: ${SAUCE_USERNAME}
+      SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
+      SAUCE_REGION: ${SAUCE_REGION}
+      SAUCE_BUILD_TYPE: Orchestrate
+  - name: photon-js-webdriver-appium-app-android-rdc
+    image: suncup/photon-js:latest
+    resourceProfile: c3m3
+    workload: webdriver
+    entrypoint: npm run --prefix webdriverio/appium-app/best-practices test.saucelabs.android.rdc
+    env:
+      SAUCE_USERNAME: ${SAUCE_USERNAME}
+      SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
+      SAUCE_REGION: ${SAUCE_REGION}
+      SAUCE_BUILD_TYPE: Orchestrate
+  - name: photon-js-webdriver-appium-app-ios-rdc
+    image: suncup/photon-js:latest
+    resourceProfile: c3m3
+    workload: webdriver
+    entrypoint: npm run --prefix webdriverio/appium-app/best-practices test.saucelabs.ios.rdc
+    env:
+      SAUCE_USERNAME: ${SAUCE_USERNAME}
+      SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
+      SAUCE_REGION: ${SAUCE_REGION}
+      SAUCE_BUILD_TYPE: Orchestrate

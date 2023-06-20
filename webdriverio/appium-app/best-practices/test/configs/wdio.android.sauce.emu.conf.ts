@@ -1,6 +1,6 @@
 import config from './wdio.shared.sauce.conf';
 
-const buildName = 'Android Emulator Native App' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Standard') + ' ' + `${new Date().getTime()}`;
+const buildName = 'WebdriverIO Appium Android Emulator App' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Local') + ' ' + `${new Date().getTime()}`;
 
 // ===================================================================================
 // Capabilities
@@ -30,7 +30,7 @@ config.capabilities = ['9.0', '10.0', '11', '12'].map((osVersion: string) => ({
   'appium:automationName': 'UIAutomator2',
   // The name of the App in the Sauce Labs storage, for more info see
   // https://docs.saucelabs.com/mobile-apps/app-storage/
-  'appium:app': 'storage:filename=Android.MyDemoAppRN.apk',
+  'appium:app': 'storage:filename=MyDemoAppRN.apk',
   'appium:appWaitActivity': 'com.saucelabs.mydemoapp.rn.MainActivity',
   'appium:newCommandTimeout': 240,
   // This doesn't seem to work with Appium 1.20.2 on the SL cloud =(

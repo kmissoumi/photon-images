@@ -1,6 +1,6 @@
 import config from './wdio.shared.sauce.conf';
 
-const buildName = 'iOS Simulator Native App' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Standard') + ' ' + `${new Date().getTime()}`;
+const buildName = 'WebdriverIO Appium iOS Simulator App' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Local') + ' ' + `${new Date().getTime()}`;
 
 
 iOS Native App
@@ -17,7 +17,7 @@ iOS Native App
 // ===================================================================================
 // This piece of code will run the tests on all iOS versions as mentioned
 // in this array.
-config.capabilities = ['12.4', '13.4', '14.5', '15.0'].map(
+config.capabilities = ['current_major', 'previous_major'].map(
   (osVersion: string) => ({
     // For the W3C capabilities, please check
     // https://www.w3.org/TR/webdriver1/#capabilities
@@ -29,7 +29,7 @@ config.capabilities = ['12.4', '13.4', '14.5', '15.0'].map(
     // http://appium.io/docs/en/writing-running-appium/caps/
     // should be prefixed with `appium:{capability-name}`
     'appium:platformVersion': osVersion,
-    'appium:deviceName': 'iPhone X Simulator',
+    'appium:deviceName': 'iPhone Instant Simulator',
     'appium:automationName': 'XCUITest',
     // The name of the App in the Sauce Labs storage, for more info see
     // https://docs.saucelabs.com/mobile-apps/app-storage/
