@@ -1,4 +1,4 @@
-name: Build & Test Image for Webdriver Demo
+name: Test Image with Sauce Connect
 
 on:
   workflow_dispatch:
@@ -29,7 +29,7 @@ jobs:
           username: ${{ secrets.SAUCE_USERNAME }}
           accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
           tunnelName: github-action-tunnel
-          configFile: ${{ github.workspace }}/.sauce/sc.yml
+          scVersion: 4.8.2
       -
         name: Run test from CI via Hosted Test Orchestration
         continue-on-error: true
