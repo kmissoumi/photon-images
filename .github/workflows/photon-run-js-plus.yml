@@ -28,7 +28,7 @@ jobs:
         with:
           username: ${{ secrets.SAUCE_USERNAME }}
           accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
-          region: ${SAUCE_REGION}
+          region: ${{ SAUCE_REGION }}
           tunnelName: github-action-tunnel
           scVersion: 4.8.2
           retryTimeout: 0
@@ -46,5 +46,5 @@ jobs:
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-          SAUCE_REGION: ${SAUCE_REGION}
+          SAUCE_REGION: ${{ SAUCE_REGION }}
           SAUCE_BUILD_TYPE: "Orchestrate"
