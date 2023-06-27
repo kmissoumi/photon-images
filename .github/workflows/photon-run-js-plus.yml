@@ -38,7 +38,7 @@ jobs:
         if: ${{ failure() }}
         with:
           name: sauce-connect-log
-          path: ${{ env.SAUCE_CONNECT_DIR_IN_HOST }}/sauce-connect.log
+          path: ${PWD}/sauce-connect.log
       -
         name: Run test from CI via Hosted Test Orchestration
         continue-on-error: true
