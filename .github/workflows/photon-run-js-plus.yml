@@ -23,13 +23,22 @@ jobs:
           saucectl-version: latest
           skip-run: true
       -
-        name: Sauce connect action
+        name: Sauce Connect Action
         uses: saucelabs/sauce-connect-action@v2
         with:
           username: ${{ secrets.SAUCE_USERNAME }}
           accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
+          region: ${SAUCE_REGION}
           tunnelName: github-action-tunnel
           scVersion: 4.8.2
+          retryTimeout: 0
+      - 
+        name: Get Sauce Connect Log
+        uses: actions/upload-artifact@v3
+        if: ${{ failure() }}
+        with:
+          name: sauce-connect-log
+          path: ${{ env.SAUCE_CONNECT_DIR_IN_HOST }}/sauce-connect.log
       -
         name: Run test from CI via Hosted Test Orchestration
         continue-on-error: true
