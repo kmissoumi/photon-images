@@ -31,7 +31,7 @@ jobs:
           region: ${{ vars.SAUCE_REGION }}
           tunnelName: github-action-tunnel
           scVersion: 4.8.2
-          retryTimeout: 0
+          retryTimeout: 1
       - 
         name: Get Sauce Connect Log
         uses: actions/upload-artifact@v3
