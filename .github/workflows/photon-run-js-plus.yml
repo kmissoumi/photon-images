@@ -1,0 +1,41 @@
+name: Build & Test Image for Webdriver Demo
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - "workflow-sc"
+
+jobs:
+  js-plus:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Install saucectl
+        uses: saucelabs/saucectl-run-action@v3
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          saucectl-version: latest
+          skip-run: true
+      -
+        name: Sauce connect action
+        uses: saucelabs/sauce-connect-action@v2
+        with:
+          username: ${{ secrets.SAUCE_USERNAME }}
+          accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
+          tunnelName: github-action-tunnel
+          configFile: ${{ github.workspace }}/.sauce/sc.yml
+      -
+        name: Run test from CI via Hosted Test Orchestration
+        continue-on-error: true
+        run: saucectl run --config .sauce/config-wdio-webdriver-sc.yml
+        env:
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+          SAUCE_REGION: ${SAUCE_REGION}
+          SAUCE_BUILD_TYPE: "Orchestrate"
