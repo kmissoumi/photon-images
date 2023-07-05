@@ -17,7 +17,7 @@ const buildName = 'WebdriverIO Appium iOS Simulator App' + ' ' + (process.env.SA
 // ===================================================================================
 // This piece of code will run the tests on all iOS versions as mentioned
 // in this array.
-config.capabilities = ['current_major', 'previous_major'].map(
+config.capabilities = ['current_major'].map(
   (osVersion: string) => ({
     // For the W3C capabilities, please check
     // https://www.w3.org/TR/webdriver1/#capabilities

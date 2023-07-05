@@ -1,6 +1,8 @@
 apiVersion: v1alpha
 kind: imagerunner
-region: ${SAUCE_REGION}
+sauce:
+  concurrency: 4
+  region: ${SAUCE_REGION}
 suites:
   - name: photon-js-webdriver-appium-app-android-emu
     image: suncup/photon-js:latest

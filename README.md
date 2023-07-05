@@ -2,21 +2,25 @@
 
 # Tested on macOS and Linux Subsystem for Windows
 
+
 # set the env
 export SAUCE_USERNAME=""            # string, sauce labs username
 export SAUCE_ACCESS_KEY=""          # string, sauce labs access key
 export SAUCE_REGION=""              # string, "us-west-1" or "eu-central-1"
 
+which sc saucectl jq curl && printf '\nBin check completed OK!\n' || printf '\nBin check NOTOK! Stop, install, and re-run.\n'
+
 # check your env
 env|grep SAUCE
 
 # run via localhost
-npm install --prefix webdriverio/webdriver/best-practices
-npm run     --prefix webdriverio/webdriver/best-practices test.saucelabs.v2
+npm install --prefix demo-webdriverio/webdriver/best-practices
+npm run     --prefix demo-webdriverio/webdriver/best-practices test.saucelabs.v2
 
 # run via localhost debug
-# cd webdriverio/webdriver/best-practices && npm install
+# cd demo-webdriverio/webdriver/best-practices && npm install
 # npx wdio test/configs/wdio.saucelabs.v2.conf.ts --logLevel debug
+# npm run --prefix demo-webdriverio/webdriver/best-practices test.saucelabs.v2 -- --logLevel "debug"
 
 # run via docker image
 docker run \
@@ -26,7 +30,7 @@ docker run \
     --env SAUCE_REGION=${SAUCE_REGION} \
     --env SAUCE_BUILD_TYPE="Docker" \
     docker.io/suncup/photon-js:latest \
-    npm run --prefix webdriverio/webdriver/best-practices test.saucelabs.v2
+    npm run --prefix demo-webdriverio/webdriver/best-practices test.saucelabs.v2
 
 
 # run via hosted orchestration
