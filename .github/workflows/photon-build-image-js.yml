@@ -62,7 +62,7 @@ jobs:
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-          SAUCE_REGION: ${SAUCE_REGION}
+          SAUCE_REGION: ${{ vars.SAUCE_REGION }}
       -
         name: Run test from CI via Hosted Test Orchestration
         continue-on-error: true
@@ -70,5 +70,5 @@ jobs:
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-          SAUCE_REGION: ${SAUCE_REGION}
+          SAUCE_REGION: ${{ vars.SAUCE_REGION }}
           SAUCE_BUILD_TYPE: "Orchestrate"

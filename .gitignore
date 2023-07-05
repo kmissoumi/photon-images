@@ -40,3 +40,8 @@ v6/
 .env
 
 _/
+results-*
+*.pem
+
+artifacts
+data

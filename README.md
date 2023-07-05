@@ -50,3 +50,6 @@ saucectl run --config .sauce/config-wdio-webdriver-best-practices.yml
 # example override github actions env variable
 run: echo "SAUCE_REGION=us-west-1" >> $SAUCE_ENVIRONMENT
 ```
+
+[looker-usage-report]: https://saucelabs.looker.com/looks/4708
+[photon-with-sauce-connect]: https://gitlab.tools.saucelabs.net/the/docs/-/blob/main/docs/Proposals/Sauce%20Connect%20Support.md
