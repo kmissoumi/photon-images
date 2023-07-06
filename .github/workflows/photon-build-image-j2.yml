@@ -1,4 +1,4 @@
-name: Build & Test Image for Java Demo Variat for Hosted Executer
+name: Build & Test Image for Java Demo Variant
 
 on:
   workflow_dispatch:
