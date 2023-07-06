@@ -1,11 +1,11 @@
-name: Build & Test Image for Java Demo Varian for Hosted Executer
+name: Build & Test Image for Java Demo Variat for Hosted Executer
 
 on:
   workflow_dispatch:
   pull_request:
   push:
     branches:
-      - "main"
+      - "workflow-sc"
 
 jobs:
   build:
