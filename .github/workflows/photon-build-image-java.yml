@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - "main"
+      - "workflow-sc"
 
 jobs:
   build:
@@ -60,7 +61,7 @@ jobs:
         env:
           OTEL_SDK_DISABLED: false
           LANG: "en_US.UTF-8"
-          MAVEN_OPTS: '"-XX:+TieredCompilation -XX:TieredStopAtLevel=1"'
+          MAVEN_OPTS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
           SAUCE_REGION: ${{ vars.SAUCE_REGION }}
