@@ -38,7 +38,8 @@ public class DesktopTests extends SauceBaseTest {
     public String browserVersion;
     @Parameterized.Parameter(2)
     public SaucePlatform platform;
-    private Object BUILD_NAME;
+    protected static final String BUILD_NAME = "Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build") + " " + System.currentTimeMillis();
+
 
     @Parameterized.Parameters()
     public static Collection<Object[]> crossBrowserData() {
@@ -80,7 +81,7 @@ public class DesktopTests extends SauceBaseTest {
         sauceOptions.setBrowserName(browserName);
         sauceOptions.setBrowserVersion(browserVersion);
         sauceOptions.setPlatformName(platform);
-        sauceOptions.sauce().setBuild("Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build") + " " + Instant.now().toEpochMilli());
+        sauceOptions.sauce().setBuild(BUILD_NAME);
         return sauceOptions;
     }
 
@@ -92,13 +93,7 @@ public class DesktopTests extends SauceBaseTest {
         }
 
         session = new SauceSession(sauceOptions);
-        session.setDataCenter(getDataCenter());
-        // enable switching to a different endpoint
-
         String endpoint = "https://ondemand." + System.getenv().getOrDefault("SAUCE_REGION", "us-west-1") + ".saucelabs.com:443/wd/hub";
-        // broken for eu-central-1
-        //String endpoint = "https://ondemand." + "us-west-1" + ".saucelabs.com:443/wd/hub";
-
         if(endpoint != null) {
             try {
                 this.session.setSauceUrl(new URL(endpoint));
