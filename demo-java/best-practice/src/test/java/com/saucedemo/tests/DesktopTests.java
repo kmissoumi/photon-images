@@ -80,7 +80,7 @@ public class DesktopTests extends SauceBaseTest {
         sauceOptions.setBrowserName(browserName);
         sauceOptions.setBrowserVersion(browserVersion);
         sauceOptions.setPlatformName(platform);
-        sauceOptions.setCapability("build", BUILD_NAME);
+        sauceOptions.sauce().setBuild("Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build") + " " + Instant.now().toEpochMilli());
         return sauceOptions;
     }
 
@@ -90,9 +90,6 @@ public class DesktopTests extends SauceBaseTest {
         if (sauceOptions.sauce().getName() == null) {
             sauceOptions.sauce().setName(testName.getMethodName());
         }
-
-        sauceOptions.sauce().setBuild("Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build") + " " + Instant.now().toEpochMilli());
-
 
         session = new SauceSession(sauceOptions);
         session.setDataCenter(getDataCenter());
@@ -151,5 +148,4 @@ public class DesktopTests extends SauceBaseTest {
         assertFalse(new ProductsPage(driver).isDisplayed());
     }
 
-    
 }
