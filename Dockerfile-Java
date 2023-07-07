@@ -14,8 +14,6 @@ ENV LANG=en_US.UTF-8
 ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 
 WORKDIR ${basePath}/${demoPath}
-
-COPY ${demoPath}/pom.xml ${basePath}/${demoPath}/pom.xml
-RUN mvn de.qaware.maven:go-offline-maven-plugin:resolve-dependencies
-
 COPY ${demoPath} ${basePath}/${demoPath}
+
+RUN mvn de.qaware.maven:go-offline-maven-plugin:resolve-dependencies
