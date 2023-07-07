@@ -48,6 +48,24 @@ jobs:
           saucectl-version: latest
           skip-run: true
       -
+        name: Install Maven
+        uses: s4u/setup-maven-action@v1.8.0
+        with:
+          java-version: 8
+      -
+        name: Run test from CI directly on Runner
+        continue-on-error: true
+        run: |
+          mvn -pl best-practice test -Dtest=DesktopTests
+        env:
+          OTEL_SDK_DISABLED: false
+          LANG: en_US.UTF-8
+          MAVEN_OPTS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+          SAUCE_REGION: ${{ vars.SAUCE_REGION }}
+          SAUCE_BUILD_TYPE: "CI Local"
+      -
         name: Run test from CI via Docker Image
         continue-on-error: true
         run: |
@@ -56,19 +74,20 @@ jobs:
             --env SAUCE_USERNAME=${SAUCE_USERNAME} \
             --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
             --env SAUCE_REGION=${SAUCE_REGION} \
-            --env SAUCE_BUILD_TYPE="CI Docker" \
+            --env SAUCE_BUILD_TYPE=${SAUCE_BUILD_TYPE} \
             docker.io/suncup/photon-java:latest \
             mvn -pl best-practice test -Dtest=DesktopTests
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
           SAUCE_REGION: ${{ vars.SAUCE_REGION }}
+          SAUCE_BUILD_TYPE: "CI Docker"
       -
-        name: Run test from CI via Hosted Test Orchestration
+        name: Run test from CI via Sauce Orchestrate
         continue-on-error: true
         run: saucectl run --config .sauce/config-demo-java.yml
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
           SAUCE_REGION: ${{ vars.SAUCE_REGION }}
-          SAUCE_BUILD_TYPE: "Orchestrate"
+          SAUCE_BUILD_TYPE: "CI Orchestrate"
