@@ -112,7 +112,6 @@ public class DesktopTests extends SauceBaseTest {
             loginPage.visit();
             loginPage.login("standard_user");
             assertTrue(new ProductsPage(driver).isDisplayed());
-            System.out.println("Checked Login Page " + i + "  times");
         }
     }
 
