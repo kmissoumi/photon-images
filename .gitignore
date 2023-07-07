@@ -38,3 +38,10 @@ v6/
 #
 **/.app*
 .env
+
+_/
+results-*
+*.pem
+
+artifacts
+data

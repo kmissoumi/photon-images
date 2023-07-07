@@ -14,10 +14,6 @@ import java.util.Date;
  * All Tests need to extend this class to get the correct behavior.
  */
 public abstract class AbstractTestBase {
-    //public static final String buildName = "Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build")  + " " + System.currentTimeMillis();
-    //public static final String buildName = "Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build");
-
-
     @Rule
     public TestName testName = new TestName() {
         public String getMethodName() {
@@ -29,8 +25,7 @@ public abstract class AbstractTestBase {
 
     protected static final String SAUCE_USERNAME = System.getenv("SAUCE_USERNAME");
     protected static final String SAUCE_ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
-    protected static final String SAUCE_VISUAL_API_KEY = System.getenv("SAUCE_VISUAL_API_KEY");
-    //protected static final String buildName = "Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build")  + " " + System.currentTimeMillis();
+    protected static final String BUILD_NAME = "Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build") + " " + System.currentTimeMillis();
 
     protected RemoteWebDriver driver;
 

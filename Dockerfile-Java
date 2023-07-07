@@ -10,14 +10,10 @@ ARG SAUCE_BUILD_TYPE
 ARG basePath="/usr/build"
 ARG demoPath="demo-java"
 
-ENV OTEL_SDK_DISABLED=false
 ENV LANG=en_US.UTF-8
 ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 
 WORKDIR ${basePath}/${demoPath}
-
 COPY ${demoPath} ${basePath}/${demoPath}
 
-RUN mvn dependency:resolve; exit 0
-RUN mvn test-compile; exit 0
-RUN mvn --projects best-practice test -Dtest=DesktopTests; exit 0
+RUN mvn de.qaware.maven:go-offline-maven-plugin:resolve-dependencies

@@ -1,41 +1,42 @@
-FROM node:16-alpine AS builder
+FROM node:18-alpine AS builder
 
 RUN apk update && apk add curl bash && rm -rf /var/cache/apk/*
 
-ARG webdriverPath="webdriverio/webdriver/best-practices"
-ARG appiumAppPath="webdriverio/appium-app/best-practices"
-ARG appiumWebPath="webdriverio/appium-web/best-practices"
 ARG basePath="/usr/build"
+ARG webdriverPath="demo-webdriverio/webdriver/best-practices"
+ARG appiumAppPath="demo-webdriverio/appium-app/best-practices"
+ARG appiumWebPath="demo-webdriverio/appium-web/best-practices"
+
 
 WORKDIR ${basePath}/${webdriverPath}
-COPY ${webdriverPath}/package.json .
-RUN npm install
+COPY    ${webdriverPath}/package.json .
+RUN     npm install
 
 WORKDIR ${basePath}/${appiumAppPath}
-COPY ${appiumAppPath}/package.json .
-RUN npm install
+COPY    ${appiumAppPath}/package.json .
+RUN     npm install
 
 WORKDIR ${basePath}/${appiumWebPath}
-COPY ${appiumWebPath}/package.json .
-RUN npm install
+COPY    ${appiumWebPath}/package.json .
+RUN     npm install
 
 
 # now with less build time
 # install steps cached and kept separate from test code
 
-FROM node:16-alpine
+FROM node:18-alpine
 
 RUN apk update && apk add curl bash && rm -rf /var/cache/apk/*
 
-ARG webdriverPath="webdriverio/webdriver/best-practices"
-ARG appiumAppPath="webdriverio/appium-app/best-practices"
-ARG appiumWebPath="webdriverio/appium-web/best-practices"
 ARG basePath="/usr/build"
+ARG webdriverPath="demo-webdriverio/webdriver/best-practices"
+ARG appiumAppPath="demo-webdriverio/appium-app/best-practices"
+ARG appiumWebPath="demo-webdriverio/appium-web/best-practices"
 
 WORKDIR ${basePath}
 
 COPY ${webdriverPath} ${basePath}/${webdriverPath}
-COPY ${appiumAppPath} ${basePath}/${appiumAppPath}
+COPY ${appiumAppPath} ${basePath}/{appiumAppPath}
 COPY ${appiumWebPath} ${basePath}/${appiumWebPath}
 
 COPY --from=builder ${basePath}/${webdriverPath}/node_modules ${basePath}/${webdriverPath}/node_modules

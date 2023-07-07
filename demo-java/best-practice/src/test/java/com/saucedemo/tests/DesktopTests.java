@@ -1,7 +1,5 @@
 package com.saucedemo.tests;
 
-import com.saucedemo.AbstractTestBase;
-//import com.saucedemo.MobileTestsBase;
 import com.saucedemo.pages.LoginPage;
 import com.saucedemo.pages.ProductsPage;
 import com.saucelabs.saucebindings.Browser;
@@ -25,12 +23,8 @@ import java.util.Collection;
 import java.util.List;
 import java.time.Instant;
 
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-
-
 
 /** Desktop Tests. */
 @RunWith(Parameterized.class)
@@ -44,37 +38,39 @@ public class DesktopTests extends SauceBaseTest {
     public String browserVersion;
     @Parameterized.Parameter(2)
     public SaucePlatform platform;
+    protected static final String BUILD_NAME = "Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local") + " " + System.currentTimeMillis();
+
 
     @Parameterized.Parameters()
     public static Collection<Object[]> crossBrowserData() {
         return Arrays.asList(new Object[][] {
-                { Browser.CHROME, "latest", SaucePlatform.WINDOWS_10 },
+                { Browser.CHROME, "latest",   SaucePlatform.WINDOWS_10 },
                 { Browser.CHROME, "latest-1", SaucePlatform.WINDOWS_10 },
-                { Browser.SAFARI, "latest", SaucePlatform.MAC_MOJAVE },
-                { Browser.CHROME, "latest", SaucePlatform.MAC_MOJAVE },
+                { Browser.SAFARI, "latest",   SaucePlatform.MAC_MOJAVE },
+                { Browser.CHROME, "latest",   SaucePlatform.MAC_MOJAVE },
                 
                          // Duplication below for demo purposes of massive parallelization
-                         {Browser.CHROME, "latest", SaucePlatform.WINDOWS_10},
+                         {Browser.CHROME, "latest",   SaucePlatform.WINDOWS_10},
                          {Browser.CHROME, "latest-1", SaucePlatform.WINDOWS_10},
-                         {Browser.SAFARI, "latest", SaucePlatform.MAC_MOJAVE},
-                         {Browser.CHROME, "latest", SaucePlatform.MAC_MOJAVE},
-                         {Browser.CHROME, "latest", SaucePlatform.WINDOWS_10},
+                         {Browser.SAFARI, "latest",   SaucePlatform.MAC_MOJAVE},
+                         {Browser.CHROME, "latest",   SaucePlatform.MAC_MOJAVE},
+                         {Browser.CHROME, "latest",   SaucePlatform.WINDOWS_10},
                          {Browser.CHROME, "latest-1", SaucePlatform.WINDOWS_10},
-                         {Browser.SAFARI, "latest", SaucePlatform.MAC_MOJAVE},
-                         {Browser.CHROME, "latest", SaucePlatform.MAC_MOJAVE}
+                         {Browser.SAFARI, "latest",   SaucePlatform.MAC_MOJAVE},
+                         {Browser.CHROME, "latest",   SaucePlatform.MAC_MOJAVE}
                          /*
-                         {Browser.CHROME, "latest", SaucePlatform.WINDOWS_10},
+                         {Browser.CHROME, "latest",   SaucePlatform.WINDOWS_10},
                          {Browser.CHROME, "latest-1", SaucePlatform.WINDOWS_10},
-                         {Browser.SAFARI, "latest", SaucePlatform.MAC_MOJAVE},
-                         {Browser.CHROME, "latest", SaucePlatform.MAC_MOJAVE},
-                         {Browser.CHROME, "latest", SaucePlatform.WINDOWS_10},
+                         {Browser.SAFARI, "latest",   SaucePlatform.MAC_MOJAVE},
+                         {Browser.CHROME, "latest",   SaucePlatform.MAC_MOJAVE},
+                         {Browser.CHROME, "latest",   SaucePlatform.WINDOWS_10},
                          {Browser.CHROME, "latest-1", SaucePlatform.WINDOWS_10},
-                         {Browser.SAFARI, "latest", SaucePlatform.MAC_MOJAVE},
-                         {Browser.CHROME, "latest", SaucePlatform.MAC_MOJAVE},
-                         {Browser.CHROME, "latest", SaucePlatform.WINDOWS_10},
+                         {Browser.SAFARI, "latest",   SaucePlatform.MAC_MOJAVE},
+                         {Browser.CHROME, "latest",   SaucePlatform.MAC_MOJAVE},
+                         {Browser.CHROME, "latest",   SaucePlatform.WINDOWS_10},
                          {Browser.CHROME, "latest-1", SaucePlatform.WINDOWS_10},
-                         {Browser.SAFARI, "latest", SaucePlatform.MAC_MOJAVE},
-                         {Browser.CHROME, "latest", SaucePlatform.MAC_MOJAVE},
+                         {Browser.SAFARI, "latest",   SaucePlatform.MAC_MOJAVE},
+                         {Browser.CHROME, "latest",   SaucePlatform.MAC_MOJAVE},
                 */
         });
     }
@@ -85,6 +81,7 @@ public class DesktopTests extends SauceBaseTest {
         sauceOptions.setBrowserName(browserName);
         sauceOptions.setBrowserVersion(browserVersion);
         sauceOptions.setPlatformName(platform);
+        sauceOptions.sauce().setBuild(BUILD_NAME);
         return sauceOptions;
     }
 
@@ -93,20 +90,10 @@ public class DesktopTests extends SauceBaseTest {
         SauceOptions sauceOptions = createSauceOptions();
         if (sauceOptions.sauce().getName() == null) {
             sauceOptions.sauce().setName(testName.getMethodName());
-        }        
-        sauceOptions.sauce().setBuild("Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build") + " " + Instant.now().toEpochMilli());
-        //sauceOptions.sauce().setBuild("Java Best Practice Demo" + " " + System.getenv().getOrDefault("SAUCE_BUILD_TYPE", "Local Build"));
-
-        //sauceOptions.setCapability("build", buildName);
+        }
 
         session = new SauceSession(sauceOptions);
-        session.setDataCenter(getDataCenter());
-        // enable switching to a different endpoint
-
-        //String endpoint = "https://ondemand." + System.getenv().getOrDefault("SAUCE_REGION", "us-west-1") + ".saucelabs.com:443/wd/hub";
-        // broken for eu-central-1
-        String endpoint = "https://ondemand." + "us-west-1" + ".saucelabs.com:443/wd/hub";
-
+        String endpoint = "https://ondemand." + System.getenv().getOrDefault("SAUCE_REGION", "us-west-1") + ".saucelabs.com:443/wd/hub";
         if(endpoint != null) {
             try {
                 this.session.setSauceUrl(new URL(endpoint));
@@ -116,6 +103,16 @@ public class DesktopTests extends SauceBaseTest {
         }
         
         driver = session.start();
+    }
+
+    @Test()
+    public void loginWorksMultiPass() {
+        for(int i = 0; i < 40; i++){
+            LoginPage loginPage = new LoginPage(driver);
+            loginPage.visit();
+            loginPage.login("standard_user");
+            assertTrue(new ProductsPage(driver).isDisplayed());
+        }
     }
 
     @Test()
@@ -145,5 +142,4 @@ public class DesktopTests extends SauceBaseTest {
         assertFalse(new ProductsPage(driver).isDisplayed());
     }
 
-    
 }

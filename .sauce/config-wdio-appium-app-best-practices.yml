@@ -1,12 +1,14 @@
 apiVersion: v1alpha
 kind: imagerunner
-region: ${SAUCE_REGION}
+sauce:
+  concurrency: 4
+  region: ${SAUCE_REGION}
 suites:
   - name: photon-js-webdriver-appium-app-android-emu
     image: suncup/photon-js:latest
     resourceProfile: c3m3
     workload: webdriver
-    entrypoint: npm run --prefix webdriverio/appium-app/best-practices test.saucelabs.android.emu
+    entrypoint: npm run --prefix demo-webdriverio/appium-app/best-practices test.saucelabs.android.emu
     env:
       SAUCE_USERNAME: ${SAUCE_USERNAME}
       SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
@@ -16,7 +18,7 @@ suites:
     image: suncup/photon-js:latest
     resourceProfile: c3m3
     workload: webdriver
-    entrypoint: npm run --prefix webdriverio/appium-app/best-practices test.saucelabs.ios.sim
+    entrypoint: npm run --prefix demo-webdriverio/appium-app/best-practices test.saucelabs.ios.sim
     env:
       SAUCE_USERNAME: ${SAUCE_USERNAME}
       SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
@@ -26,7 +28,7 @@ suites:
     image: suncup/photon-js:latest
     resourceProfile: c3m3
     workload: webdriver
-    entrypoint: npm run --prefix webdriverio/appium-app/best-practices test.saucelabs.android.rdc
+    entrypoint: npm run --prefix demo-webdriverio/appium-app/best-practices test.saucelabs.android.rdc
     env:
       SAUCE_USERNAME: ${SAUCE_USERNAME}
       SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
@@ -40,5 +42,4 @@ suites:
     env:
       SAUCE_USERNAME: ${SAUCE_USERNAME}
       SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
-      SAUCE_REGION: ${SAUCE_REGION}
       SAUCE_BUILD_TYPE: Orchestrate

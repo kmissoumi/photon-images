@@ -56,11 +56,11 @@ public class RealDeviceWebTests extends MobileTestsBase {
         MutableCapabilities sauceOptions = new MutableCapabilities();
         sauceOptions.setCapability("username", EmuSimWebAppTests.SAUCE_USERNAME);
         sauceOptions.setCapability("accesskey", EmuSimWebAppTests.SAUCE_ACCESS_KEY);
-        sauceOptions.setCapability("build", buildName);
+        sauceOptions.setCapability("build", BUILD_NAME);
         sauceOptions.setCapability("name", testName.getMethodName());
         capabilities.setCapability("sauce:options", sauceOptions);
 
-        driver = new IOSDriver(Endpoints.getRealDevicesHub(), capabilities);
+        driver = new IOSDriver(Endpoints.getSauceHub(), capabilities);
     }
 
     @Test

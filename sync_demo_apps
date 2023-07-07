@@ -54,7 +54,6 @@ sync_release () {
 
 
 printf 'Syncing demo apps to Sauce Labs storage...\n'
-sync_release "saucelabs/my-demo-app-rn"
 sync_release "saucelabs/my-demo-app-android"
 sync_release "saucelabs/my-demo-app-ios"
 printf '\n\n'
