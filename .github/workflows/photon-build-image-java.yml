@@ -57,6 +57,7 @@ jobs:
         name: Run test from CI directly on Runner
         continue-on-error: true
         run: |
+          cd demo-java
           mvn -pl best-practice test -Dtest=DesktopTests
         env:
           OTEL_SDK_DISABLED: false
@@ -75,14 +76,13 @@ jobs:
             --env SAUCE_USERNAME=${SAUCE_USERNAME} \
             --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
             --env SAUCE_REGION=${SAUCE_REGION} \
-            --env SAUCE_BUILD_TYPE=${SAUCE_BUILD_TYPE} \
+            --env SAUCE_BUILD_TYPE="CI Docker" \
             docker.io/suncup/photon-java:latest \
             mvn -pl best-practice test -Dtest=DesktopTests
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
           SAUCE_REGION: ${{ vars.SAUCE_REGION }}
-          SAUCE_BUILD_TYPE: "CI Docker"
       -
         name: Run test from CI via Sauce Orchestrate
         continue-on-error: true
