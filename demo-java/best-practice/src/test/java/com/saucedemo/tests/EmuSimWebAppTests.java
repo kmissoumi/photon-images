@@ -71,11 +71,11 @@ public class EmuSimWebAppTests extends MobileTestsBase {
         sauceOptions.setCapability("username", EmuSimWebAppTests.SAUCE_USERNAME);
         sauceOptions.setCapability("accesskey", EmuSimWebAppTests.SAUCE_ACCESS_KEY);
         // sauceOptions.setCapability("appiumVersion", "1.22.3");
-        sauceOptions.setCapability("build", buildName);
+        sauceOptions.setCapability("build", BUILD_NAME);
         sauceOptions.setCapability("name", testName.getMethodName());
         capabilities.setCapability("sauce:options", sauceOptions);
 
-        driver = new RemoteWebDriver(Endpoints.getEmuSimHub(), capabilities);
+        driver = new RemoteWebDriver(Endpoints.getSauceHub(), capabilities);
     }
 
     @Test
