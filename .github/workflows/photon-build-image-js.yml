@@ -69,7 +69,7 @@ jobs:
             --env SAUCE_REGION=${SAUCE_REGION} \
             --env SAUCE_BUILD_TYPE="Docker" \
             docker.io/suncup/photon-js:latest \
-            npm run --prefix webdriverio/webdriver/best-practices test.saucelabs.v2
+            npm run --prefix demo-webdriverio/webdriver/best-practices test.saucelabs.v2
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
