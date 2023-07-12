@@ -4,7 +4,7 @@ import SauceLabs, { Job } from 'saucelabs';
 
 const defaultBrowserSauceOptions = {
 
-  build: 'WebdriverIO Async Desktop Web v2' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Local') + ' ' + `${new Date().getTime()}`,
+  build: 'WebdriverIO Async Desktop Web' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Local Build') + ' ' + (process.env.GITHUB_RUN_NUMBER || `${new Date().getTime()}`),
   screenResolution: '1600x1200',
   tags: [ (process.env.SAUCE_BUILD_TYPE || 'local'), 'demo', 'js'  ],
 
