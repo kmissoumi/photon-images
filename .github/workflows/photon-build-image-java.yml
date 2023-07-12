@@ -6,7 +6,6 @@ on:
   push:
     branches:
       - "main"
-      - "workflow-sc"
 
 jobs:
   build:
@@ -61,14 +60,12 @@ jobs:
           mvn de.qaware.maven:go-offline-maven-plugin:resolve-dependencies
           mvn -pl best-practice test -Dtest=DesktopTests
         env:
-          OTEL_SDK_DISABLED: false
-          OTEL_JAVAAGENT_ENABLED: false
           LANG: "en_US.UTF-8"
           MAVEN_OPTS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
           SAUCE_REGION: ${{ vars.SAUCE_REGION }}
-          SAUCE_BUILD_TYPE: "Local CI"
+          SAUCE_BUILD_TYPE: "Direct"
       -
         name: Run test from CI via Docker Image
         continue-on-error: true

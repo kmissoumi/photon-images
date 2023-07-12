@@ -2,7 +2,7 @@ apiVersion: v1alpha
 kind: imagerunner
 sauce:
   concurrency: 4
-  region: ${SAUCE_REGION}
+
 suites:
   - name: photon-js-webdriver-appium-app-android-emu
     image: suncup/photon-js:latest
@@ -38,7 +38,7 @@ suites:
     image: suncup/photon-js:latest
     resourceProfile: c3m3
     workload: webdriver
-    entrypoint: npm run --prefix webdriverio/appium-app/best-practices test.saucelabs.ios.rdc
+    entrypoint: npm run --prefix demo-webdriverio/appium-app/best-practices test.saucelabs.ios.rdc
     env:
       SAUCE_USERNAME: ${SAUCE_USERNAME}
       SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
