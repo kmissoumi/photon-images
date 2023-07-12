@@ -76,7 +76,7 @@ jobs:
             --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
             --env SAUCE_REGION=${SAUCE_REGION} \
             --env SAUCE_BUILD_TYPE="Docker" \
-            --env GITHUB_RUN_NUMBER=${{ github.run_number }}
+            --env GITHUB_RUN_NUMBER=${{ github.run_number }} \
             docker.io/suncup/photon-java:latest \
             mvn -pl best-practice test -Dtest=DesktopTests
         env:
