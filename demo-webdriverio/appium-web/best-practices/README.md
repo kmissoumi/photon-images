@@ -11,15 +11,11 @@ This will install all needed dependencies that are listed in the `package.json` 
 > NOTE: Make sure you are in the folder `webdriverio/appium-web/best-practices` when you execute this command
 
 ## Run Android and iOS tests on Sauce Labs
-You can run your mobile web tests on Sauce Labs US DC with these commands
+You can run your mobile web tests on Sauce Labs with these commands
 
-    npm run test.saucelabs.ios.us
-    npm run test.saucelabs.android.us
+    npm run test.saucelabs.ios
+    npm run test.saucelabs.android
 
-You can run your mobile web tests on Sauce Labs EU DC with these commands
-
-    npm run test.saucelabs.ios.us
-    npm run test.saucelabs.android.us
 
 It will spin up multiple [emulators](test/configs/wdio.saucelabs.android.conf.js) or 
 [simulators](test/configs/wdio.saucelabs.ios.conf.js).

@@ -68,7 +68,7 @@ jobs:
             --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
             --env SAUCE_REGION=${SAUCE_REGION} \
             --env SAUCE_BUILD_TYPE="Docker" \
-            --env GITHUB_RUN_NUMBER=${{ github.run_number }} \
+            --env SAUCE_RUN_NUMBER=${{ github.run_number }} \
             docker.io/suncup/photon-js:latest \
             npm run --prefix demo-webdriverio/webdriver/best-practices test.saucelabs.v2
         env:
@@ -78,7 +78,7 @@ jobs:
       -
         name: Run test from CI via Sauce Orchestrate
         continue-on-error: true
-        run: saucectl run --config .sauce/config-wdio-webdriver-best-practices.yml --env GITHUB_RUN_NUMBER=${{ github.run_number }}
+        run: saucectl run --config .sauce/config-wdio-webdriver-best-practices.yml --env SAUCE_RUN_NUMBER=${{ github.run_number }}
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}

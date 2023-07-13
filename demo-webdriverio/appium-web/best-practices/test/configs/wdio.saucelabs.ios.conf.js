@@ -1,6 +1,5 @@
 const { config } = require('./wdio.shared.sauce.mobile.conf');
-const build = 'WebdriverIO Appium iOS Web' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Local') + ' ' + `${new Date().getTime()}`;
-
+const build = 'WebdriverIO Appium iOS Web' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Local') + ' Build #' + (process.env.SAUCE_RUN_NUMBER || `${new Date().getTime()}`);
 
 // ============
 // Capabilities
