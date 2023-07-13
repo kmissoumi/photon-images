@@ -1,12 +1,8 @@
 apiVersion: v1alpha
 kind: imagerunner
 
-sauce:
-  concurrency: 5
-  region: eu-central-1
-
 suites:
-  - name: photon-newman-${BUILD_ID}
+  - name: photon-newman
     image: postman/newman_alpine33:latest
     entrypoint: "newman run https://www.getpostman.com/collections/8a0c9bc08f062d12dcda --reporters cli,json,junit"
     workload: other 
