@@ -8,7 +8,7 @@ ARG demoPath="demo-java"
 ENV LANG=en_US.UTF-8
 ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 
-WORKDIR ${basePath}
-COPY    ${demoPath} ${demoPath}
+WORKDIR ${basePath}/${demoPath}
+COPY    ${demoPath} .
 
 RUN mvn de.qaware.maven:go-offline-maven-plugin:resolve-dependencies
