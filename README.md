@@ -29,3 +29,6 @@ docker run \
 #
 saucectl run --config .sauce/config-wdio-webdriver-best-practices.yml
 ```
+
+[![Build & Test Image for Java Demo](https://github.com/kmissoumi/photon-images/actions/workflows/photon-build-image-java.yml/badge.svg)](https://github.com/kmissoumi/photon-images/actions/workflows/photon-build-image-java.yml)  
+[![Build & Test Image for Webdriver Demo](https://github.com/kmissoumi/photon-images/actions/workflows/photon-build-image-js.yml/badge.svg)](https://github.com/kmissoumi/photon-images/actions/workflows/photon-build-image-js.yml)
