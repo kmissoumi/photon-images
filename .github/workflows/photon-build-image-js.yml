@@ -58,6 +58,7 @@ jobs:
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
           SAUCE_REGION: ${{ vars.SAUCE_REGION }}
           SAUCE_BUILD_TYPE: "Direct"
+          SAUCE_RUN_NUMBER: ${{ github.run_number }}
       -
         name: Run test from CI via Docker
         continue-on-error: true
