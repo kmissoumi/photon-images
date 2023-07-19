@@ -1,0 +1,23 @@
+FROM node:18-alpine AS builder
+
+RUN apk update && apk add curl bash && rm -rf /var/cache/apk/*
+
+ARG basePath="/usr/build"
+ARG demoPath="demo-nightwatch/webdriver/examples/update-sauce"
+
+WORKDIR ${basePath}/${demoPath}
+COPY    ${demoPath}/package.json .
+RUN     npm install
+
+
+# install steps cached and kept separate from test code\
+FROM node:18-alpine
+
+RUN apk update && apk add curl bash && rm -rf /var/cache/apk/*
+
+ARG basePath="/usr/build"
+ARG demoPath="demo-nightwatch/webdriver/examples/update-sauce"
+
+WORKDIR ${basePath}
+COPY    ${demoPath} ${demoPath}
+COPY --from=builder ${basePath}/${demoPath}/node_modules ${demoPath}/node_modules

@@ -1,0 +1,87 @@
+name: Build & Test Image for Nightwatch Demo
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: Dockerfile-Nightwatch
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64
+          push: true
+          tags: |
+            suncup/photon-nightwatch:0.1.${{ github.run_number }}
+            suncup/photon-nightwatch:latest
+      -
+        name: Install saucectl
+        uses: saucelabs/saucectl-run-action@v3
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          saucectl-version: latest
+          skip-run: true
+      -
+        name: Run test on CI
+        continue-on-error: true
+        run: |
+          npm install --prefix demo-nightwatch/webdriver/examples/update-sauce
+          npm run --prefix demo-nightwatch/webdriver/examples/update-sauce test.saucelabs.us
+        env:
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+          SAUCE_REGION: ${{ vars.SAUCE_REGION }}
+          SAUCE_BUILD_TYPE: "Direct"
+          SAUCE_RUN_NUMBER: ${{ github.run_number }}
+      -
+        name: Run test from CI via Docker
+        continue-on-error: true
+        run: |
+          docker run \
+            --platform linux/amd64 --pull always \
+            --env SAUCE_USERNAME=${SAUCE_USERNAME} \
+            --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
+            --env SAUCE_REGION=${SAUCE_REGION} \
+            --env SAUCE_BUILD_TYPE="Docker" \
+            --env SAUCE_RUN_NUMBER=${{ github.run_number }} \
+            docker.io/suncup/photon-nightwatch:latest \
+            npm run --prefix demo-nightwatch/webdriver/examples/update-sauce test.saucelabs.us
+        env:
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+          SAUCE_REGION: ${{ vars.SAUCE_REGION }}
+      -
+        name: Run test from CI via Sauce Orchestrate
+        continue-on-error: true
+        run: saucectl run --config .sauce/config-demo-nightwatch.yml --env SAUCE_RUN_NUMBER=${{ github.run_number }}
+        env:
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+          SAUCE_REGION: ${{ vars.SAUCE_REGION }}
+          SAUCE_BUILD_TYPE: "Orchestrate"

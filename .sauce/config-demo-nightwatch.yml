@@ -1,0 +1,14 @@
+apiVersion: v1alpha
+kind: imagerunner
+
+suites:
+  - name: photon-js-nightwatch
+    image: suncup/photon-nightwatch:latest
+    resourceProfile: c3m3
+    workload: webdriver
+    entrypoint: npm run --prefix demo-nightwatch/webdriver/examples/update-sauce test.saucelabs.us
+    env:
+      SAUCE_USERNAME: ${SAUCE_USERNAME}
+      SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
+      SAUCE_REGION: ${SAUCE_REGION}
+      SAUCE_BUILD_TYPE: Orchestrate
