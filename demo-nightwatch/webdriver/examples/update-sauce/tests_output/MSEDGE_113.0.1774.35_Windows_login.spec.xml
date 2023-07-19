@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="3">
+
+  <testsuite name="login.spec"
+    errors="0" failures="0" hostname="" id="" package="login.spec" skipped="0"
+    tests="3" time="11.27" timestamp="">
+  
+    <testcase name="Login page: should be able to test loading of login page" classname="login.spec" time="1.824" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Login page: should be able to login with a standard user" classname="login.spec" time="5.013" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Login page: should not be able to login with a locked user" classname="login.spec" time="4.429" assertions="4">
+
+    
+
+    
+
+    
+
+    
+    </testcase>
+  
+
+  
+
+    
+
+  
+  </testsuite>
+</testsuites>
