@@ -40,9 +40,9 @@ It will run all tests in your local Chrome browser in headless mode.
 ## Run tests on Sauce Labs
 You can run your tests on Sauce Labs with this command
 
-    npm run test.saucelabs.us
-    npm run test.saucelabs.eu
-
+```
+export SAUCE_RUN_NUMBER=$((SAUCE_RUN_NUMBER+1)); npm run --prefix demo-nightwatch/webdriver/examples/update-sauce test.saucelabs
+```
 
 It will spin up multiple browsers which you can find in the [nightwatch.conf.js](tests/configs/nightwatch.conf.js) and 
 in the [package.json](package.json).

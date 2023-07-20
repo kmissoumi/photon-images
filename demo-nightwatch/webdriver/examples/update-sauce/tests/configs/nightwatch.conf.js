@@ -1,9 +1,13 @@
 const {join} = require('path');
-const build = `Nightwatch Desktop Web build-${process.env.DATE}`;
+//const { BUILD } = require('./sharedConstants');
+//const build_details = `${process.env.SAUCE_BUILD_TYPE || 'Local'} Build #${process.env.SAUCE_RUN_NUMBER || new Date().getTime()}`;
+//const build = `Nightwatch Desktop Web ${process.env.SAUCE_BUILD_TYPE || 'Local'} Build #${process.env.SAUCE_RUN_NUMBER || new Date().getTime()}`
+//const build = 'Nightwatch Desktop Web' + ' ' + build_details;
 
 // More information about the configuration file can be found here
 // https://nightwatchjs.org/gettingstarted/configuration/
 module.exports = {
+   
     src_folders: [join(process.cwd(), 'tests/specs/')],
     page_objects_path: [join(process.cwd(), 'tests/page-objects/')],
     // See `/tests/custom-commands/customSauceLabsEnd.js` for the logic
@@ -20,12 +24,12 @@ module.exports = {
         },
         // Our Sauce Labs object
         sauceLabs: {
-            selenium_host: `ondemand.${process.env.REGION === 'eu' ? 'eu-central-1' : 'us-west-1'}.saucelabs.com`,
+            selenium_host: `ondemand.${process.env.SAUCE_REGION === 'eu-central-1' ? 'eu-central-1' : 'us-west-1'}.saucelabs.com`,
             selenium_port: 80,
             username: process.env.SAUCE_USERNAME,
             access_key: process.env.SAUCE_ACCESS_KEY,
             desiredCapabilities: {
-                build,
+                build: 'Nightwatch Desktop Web' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Local') + ' Build #' + (process.env.SAUCE_RUN_NUMBER || process.env.DATE),
                 screenResolution: '1600x1200',
                 seleniumVersion: '3.141.59',
             },

@@ -5,7 +5,7 @@ exports.command = async function () {
     const myAccount = new SauceLabs.default({
         user: process.env.SAUCE_USERNAME,
         key: process.env.SAUCE_ACCESS_KEY,
-        region: process.env.REGION === 'eu' ? 'eu' : 'us',
+        region: process.env.SAUCE_REGION === 'eu-central-1' ? 'eu-central-1' : 'us-west-1',
     });
     // 3a. Get the sessionId
     const sessionId = this.capabilities['webdriver.remote.sessionid'];
