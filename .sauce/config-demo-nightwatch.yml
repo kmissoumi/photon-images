@@ -6,7 +6,7 @@ suites:
     image: suncup/photon-nightwatch:latest
     resourceProfile: c3m3
     workload: webdriver
-    entrypoint: npm run --prefix demo-nightwatch/webdriver/examples/update-sauce test.saucelabs.us
+    entrypoint: npm run --prefix demo-nightwatch/webdriver/examples/update-sauce test.saucelabs
     env:
       SAUCE_USERNAME: ${SAUCE_USERNAME}
       SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}

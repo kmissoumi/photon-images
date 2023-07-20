@@ -49,7 +49,7 @@ jobs:
         continue-on-error: true
         run: |
           npm install --prefix demo-nightwatch/webdriver/examples/update-sauce
-          npm run --prefix demo-nightwatch/webdriver/examples/update-sauce test.saucelabs.us
+          npm run --prefix demo-nightwatch/webdriver/examples/update-sauce test.saucelabs
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
@@ -68,7 +68,7 @@ jobs:
             --env SAUCE_BUILD_TYPE="Docker" \
             --env SAUCE_RUN_NUMBER=${{ github.run_number }} \
             docker.io/suncup/photon-nightwatch:latest \
-            npm run --prefix demo-nightwatch/webdriver/examples/update-sauce test.saucelabs.us
+            npm run --prefix demo-nightwatch/webdriver/examples/update-sauce test.saucelabs
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
