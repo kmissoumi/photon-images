@@ -1,0 +1,11 @@
+user:
+api-key:
+region:
+vm-version: 'v2alpha2'
+verbose: 0
+logfile: "-"
+shared-tunnel: false
+tunnel-name: backend-dev
+no-remove-colliding-tunnels: false
+tunnel-domains: [ "api.nasa.gov" ]
+no-ssl-bump-domains: [ all ]
