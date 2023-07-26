@@ -1,7 +1,7 @@
 #!/bin/sh -xv
 
 cd /usr/build
-tar xvkf za.tar
+tar xvkf /var/run/za.tar
 
 if printf '%s\n' "${1}" | grep -Fqe "webdriver"; then
     npm install --prefix ${1}

@@ -5,32 +5,14 @@ suites:
   - name: photon-js-build-less
     image: node:18-alpine
     resourceProfile: c3m3
-    workload: webdriver
-    entrypoint: sh /usr/build/build-less.sh "demo-webdriverio/webdriver/best-practices" "test.saucelabs.v2"
+    workload: other
+    entrypoint: sh /bin/build-less.sh "demo-webdriverio/webdriver/best-practices" "test.saucelabs.v2"
     files:
       - src: "${PWD}/za.tar"
-        dst: "/usr/build/za.tar"
+        dst: "/var/run/za.tar"
       - src: "${PWD}/build-less.sh"
-        dst: "/usr/build/build-less.sh"
+        dst: "/bin/build-less.sh"
     env:
-      SAUCE_USERNAME: ${SAUCE_USERNAME}
-      SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
-      SAUCE_REGION: ${SAUCE_REGION}
-      SAUCE_BUILD_TYPE: Orchestrate Zero
-
-  - name: photon-java-build-less
-    image: maven:3-jdk-8-alpine
-    resourceProfile: c3m3
-    workload: webdriver
-    entrypoint: sh /usr/build/build-less.sh "demo-java" "mvn -pl best-practice test -Dtest=DesktopTests"
-    files:
-      - src: "${PWD}/za.tar"
-        dst: "/usr/build/za.tar"
-      - src: "${PWD}/build-less.sh"
-        dst: "/usr/build/build-less.sh"
-    env:
-      LANG: "en_US.UTF-8"
-      MAVEN_OPTS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
       SAUCE_USERNAME: ${SAUCE_USERNAME}
       SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
       SAUCE_REGION: ${SAUCE_REGION}

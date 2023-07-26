@@ -8,7 +8,7 @@ export SAUCE_REGION="us-west-1"
 git clone https://github.com/kmissoumi/photon-images.git && cd photon-images
 
 # bundle the tests
-tar --exclude='node_modules' -zcvf za.tar demo-*
+tar --exclude='node_modules' -zcvf za.tar demo-webdriver*
 
 # run your tests via orchestrate — no build, no image, no registry
 saucectl run --config .sauce/config-build-less.yml
