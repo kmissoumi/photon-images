@@ -33,3 +33,6 @@ saucectl run --config .sauce/config-wdio-webdriver-best-practices.yml
 [![Build & Test Image for Webdriver Demo](https://github.com/kmissoumi/photon-images/actions/workflows/photon-build-image-js.yml/badge.svg)](https://github.com/kmissoumi/photon-images/actions/workflows/photon-build-image-js.yml)  
 [![Build & Test Image for Java Demo](https://github.com/kmissoumi/photon-images/actions/workflows/photon-build-image-java.yml/badge.svg)](https://github.com/kmissoumi/photon-images/actions/workflows/photon-build-image-java.yml)  
 [![Build & Test Image for Nightwatch Demo](https://github.com/kmissoumi/photon-images/actions/workflows/photon-build-image-nightwatch.yml/badge.svg)](https://github.com/kmissoumi/photon-images/actions/workflows/photon-build-image-nightwatch.yml)  
+
+
+<!-- generate .tree via `tree -aI 'node_modules|artifacts|_|*.tar|.git|.tree' > .tree` -->

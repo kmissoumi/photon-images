@@ -1,0 +1,257 @@
+.
+├── .dockerignore
+├── .github
+│   └── workflows
+│       ├── photon-build-image-java.yml
+│       ├── photon-build-image-js.yml
+│       └── photon-build-image-nightwatch.yml
+├── .gitignore
+├── .nvmrc
+├── .sauce
+│   ├── config-build-less.yml
+│   ├── config-demo-java.yml
+│   ├── config-demo-nightwatch.yml
+│   ├── config-sauce-connect-backend-dev.yml
+│   └── config-wdio-webdriver-best-practices.yml
+├── Dockerfile-Java
+├── Dockerfile-JavaScript
+├── Dockerfile-Nightwatch
+├── LICENSE
+├── README.md
+├── build-less.md
+├── build-less.sh
+├── demo-java
+│   ├── LICENSE
+│   ├── best-practice
+│   │   ├── pom.xml
+│   │   ├── src
+│   │   │   └── test
+│   │   │       └── java
+│   │   │           └── com
+│   │   │               └── saucedemo
+│   │   │                   ├── AbstractTestBase.java
+│   │   │                   ├── Endpoints.java
+│   │   │                   ├── MobileTestsBase.java
+│   │   │                   ├── pages
+│   │   │                   │   ├── AbstractBasePage.java
+│   │   │                   │   ├── CheckoutStepOnePage.java
+│   │   │                   │   ├── LoginPage.java
+│   │   │                   │   ├── ProductsPage.java
+│   │   │                   │   └── ShoppingCartPage.java
+│   │   │                   └── tests
+│   │   │                       ├── DesktopTests.java
+│   │   │                       ├── EmuSimWebAppTests.java
+│   │   │                       └── RealDeviceWebTests.java
+│   │   └── target
+│   │       ├── classes
+│   │       ├── generated-sources
+│   │       │   └── annotations
+│   │       ├── generated-test-sources
+│   │       │   └── test-annotations
+│   │       ├── maven-status
+│   │       │   └── maven-compiler-plugin
+│   │       │       └── testCompile
+│   │       │           └── default-testCompile
+│   │       │               ├── createdFiles.lst
+│   │       │               └── inputFiles.lst
+│   │       ├── surefire-reports
+│   │       │   ├── TEST-com.saucedemo.tests.DesktopTests.xml
+│   │       │   └── com.saucedemo.tests.DesktopTests.txt
+│   │       └── test-classes
+│   │           └── com
+│   │               └── saucedemo
+│   │                   ├── AbstractTestBase$1.class
+│   │                   ├── AbstractTestBase$SauceTestWatcher.class
+│   │                   ├── AbstractTestBase.class
+│   │                   ├── Endpoints.class
+│   │                   ├── MobileTestsBase.class
+│   │                   ├── pages
+│   │                   │   ├── AbstractBasePage.class
+│   │                   │   ├── CheckoutStepOnePage.class
+│   │                   │   ├── LoginPage.class
+│   │                   │   ├── ProductsPage.class
+│   │                   │   └── ShoppingCartPage.class
+│   │                   └── tests
+│   │                       ├── DesktopTests.class
+│   │                       ├── EmuSimWebAppTests.class
+│   │                       └── RealDeviceWebTests.class
+│   └── pom.xml
+├── demo-newman
+│   ├── README.md
+│   └── config-demo-newman.yml
+├── demo-nightwatch
+│   ├── appium-web
+│   │   └── examples
+│   │       └── update-sauce-real-devices
+│   │           ├── .eslintignore
+│   │           ├── .eslintrc
+│   │           ├── README.md
+│   │           ├── package-lock.json
+│   │           ├── package.json
+│   │           └── tests
+│   │               ├── configs
+│   │               │   ├── e2eConstants.js
+│   │               │   └── nightwatch.conf.js
+│   │               ├── custom-commands
+│   │               │   └── customSauceLabsEnd.js
+│   │               ├── helpers
+│   │               │   └── index.js
+│   │               ├── page-objects
+│   │               │   ├── LoginPage.js
+│   │               │   └── SwagOverviewPage.js
+│   │               └── specs
+│   │                   ├── login.spec.js
+│   │                   └── swag.items.list.spec.js
+│   └── webdriver
+│       └── examples
+│           └── update-sauce
+│               ├── .eslintignore
+│               ├── .eslintrc
+│               ├── README.md
+│               ├── package-lock.json
+│               ├── package.json
+│               ├── tests
+│               │   ├── configs
+│               │   │   ├── e2eConstants.js
+│               │   │   └── nightwatch.conf.js
+│               │   ├── custom-commands
+│               │   │   └── customSauceLabsEnd.js
+│               │   ├── helpers
+│               │   │   └── index.js
+│               │   ├── page-objects
+│               │   │   ├── LoginPage.js
+│               │   │   └── SwagOverviewPage.js
+│               │   └── specs
+│               │       ├── login.spec.js
+│               │       └── swag.items.list.spec.js
+│               └── tests_output
+│                   ├── CHROME_114.0.5735.91_Windows_login.spec.xml
+│                   ├── CHROME_114.0.5735.91_Windows_swag.items.list.spec.xml
+│                   ├── FIREFOX_113.0__login.spec.xml
+│                   ├── FIREFOX_113.0__swag.items.list.spec.xml
+│                   ├── INTERNET_EXPLORER_11_WINDOWS_login.spec.xml
+│                   ├── INTERNET_EXPLORER_11_WINDOWS_swag.items.list.spec.xml
+│                   ├── MSEDGE_113.0.1774.35_Windows_login.spec.xml
+│                   ├── MSEDGE_113.0.1774.35_Windows_swag.items.list.spec.xml
+│                   └── login.spec.xml
+└── demo-webdriverio
+    ├── LICENSE
+    ├── appium-app
+    │   └── best-practices
+    │       ├── README.md
+    │       ├── package-lock.json
+    │       ├── package.json
+    │       ├── test
+    │       │   ├── configs
+    │       │   │   ├── constants.ts
+    │       │   │   ├── wdio.android.sauce.emu.conf.ts
+    │       │   │   ├── wdio.android.sauce.rdc.conf.ts
+    │       │   │   ├── wdio.ios.sauce.rdc.conf.ts
+    │       │   │   ├── wdio.ios.sauce.sim.conf.ts
+    │       │   │   ├── wdio.shared.conf.ts
+    │       │   │   └── wdio.shared.sauce.conf.ts
+    │       │   ├── helpers
+    │       │   │   ├── e2eConstants.ts
+    │       │   │   ├── gestures.ts
+    │       │   │   └── utils.ts
+    │       │   ├── screen-objects
+    │       │   │   ├── AboutScreen.ts
+    │       │   │   ├── AppScreen.ts
+    │       │   │   ├── BiometricsScreen.ts
+    │       │   │   ├── CartScreen.ts
+    │       │   │   ├── CatalogScreen.ts
+    │       │   │   ├── CheckoutAddressScreen.ts
+    │       │   │   ├── CheckoutCompleteScreen.ts
+    │       │   │   ├── CheckoutPaymentScreen.ts
+    │       │   │   ├── CheckoutReviewOrderScreen.ts
+    │       │   │   ├── DrawingScreen.ts
+    │       │   │   ├── GeoLocationScreen.ts
+    │       │   │   ├── ItemDetailsScreen.ts
+    │       │   │   ├── LoginScreen.ts
+    │       │   │   ├── Menu.ts
+    │       │   │   ├── QrCodeScreen.ts
+    │       │   │   ├── ReviewComponent.ts
+    │       │   │   ├── SortModal.ts
+    │       │   │   └── WebviewScreen.ts
+    │       │   └── specs
+    │       │       ├── cart.spec.ts
+    │       │       ├── catalog.spec.ts
+    │       │       ├── checkout.address.spec.ts
+    │       │       ├── checkout.complete.spec.ts
+    │       │       ├── checkout.payment.spec.ts
+    │       │       ├── checkout.review.order.spec.ts
+    │       │       ├── item.details.spec.ts
+    │       │       ├── login.spec.ts
+    │       │       └── navigation.spec.ts
+    │       └── tsconfig.json
+    ├── appium-web
+    │   └── best-practices
+    │       ├── README.md
+    │       ├── babel.config.js
+    │       ├── package-lock.json
+    │       ├── package.json
+    │       └── test
+    │           ├── configs
+    │           │   ├── e2eConstants.js
+    │           │   ├── wdio.saucelabs.android.conf.js
+    │           │   ├── wdio.saucelabs.ios.conf.js
+    │           │   ├── wdio.shared.conf.js
+    │           │   └── wdio.shared.sauce.mobile.conf.js
+    │           ├── helpers
+    │           │   └── index.js
+    │           ├── page-objects
+    │           │   ├── AppHeaderPage.js
+    │           │   ├── BasePage.js
+    │           │   ├── CartSummaryPage.js
+    │           │   ├── CheckoutCompletePage.js
+    │           │   ├── CheckoutPersonalInfoPage.js
+    │           │   ├── CheckoutSummaryPage.js
+    │           │   ├── LoginPage.js
+    │           │   ├── MenuPage.js
+    │           │   ├── SwagDetailsPage.js
+    │           │   └── SwagOverviewPage.js
+    │           └── specs
+    │               ├── cart.summary.spec.js
+    │               ├── checkout.complete.spec.js
+    │               ├── checkout.personal.info.spec.js
+    │               ├── checkout.summary.spec.js
+    │               ├── login.spec.js
+    │               ├── menu.spec.js
+    │               ├── swag.item.details.spec.js
+    │               └── swag.items.list.spec.js
+    └── webdriver
+        └── best-practices
+            ├── README.md
+            ├── package-lock.json
+            ├── package.json
+            ├── test
+            │   ├── configs
+            │   │   ├── e2eConstants.ts
+            │   │   ├── wdio.local.chrome.conf.ts
+            │   │   ├── wdio.saucelabs.conf.ts
+            │   │   ├── wdio.saucelabs.v2.conf.ts
+            │   │   └── wdio.shared.conf.ts
+            │   ├── helpers
+            │   │   └── index.ts
+            │   ├── page-objects
+            │   │   ├── AppHeaderPage.ts
+            │   │   ├── BasePage.ts
+            │   │   ├── CartSummaryPage.ts
+            │   │   ├── CheckoutCompletePage.ts
+            │   │   ├── CheckoutPersonalInfoPage.ts
+            │   │   ├── CheckoutSummaryPage.ts
+            │   │   ├── LoginPage.ts
+            │   │   ├── MenuPage.ts
+            │   │   ├── SwagDetailsPage.ts
+            │   │   └── SwagOverviewPage.ts
+            │   └── specs
+            │       ├── cart.summary.spec.ts
+            │       ├── checkout.complete.spec.ts
+            │       ├── checkout.personal.info.spec.ts
+            │       ├── checkout.summary.spec.ts
+            │       ├── login.spec.ts
+            │       ├── menu.spec.ts
+            │       └── swag.item.details.spec.ts
+            └── tsconfig.json
+
+72 directories, 183 files
