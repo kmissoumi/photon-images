@@ -10,11 +10,11 @@ export SAUCE_REGION=""              # string, "us-west-1" or "eu-central-1"
 which sc saucectl jq docker curl npm && printf '\nBin check completed OK!\n' || printf '\nBin check NOTOK! Stop, install, and re-run.\n'
 env|grep SAUCE
 
-# run via localhost
+# run on localhost
 npm install --prefix demo-webdriverio/webdriver/best-practices
 npm run     --prefix demo-webdriverio/webdriver/best-practices test.saucelabs.v2
 
-# run via docker image
+# run on local container
 docker run \
     --platform linux/amd64 --pull always \
     --env SAUCE_USERNAME=${SAUCE_USERNAME} \
@@ -24,8 +24,8 @@ docker run \
     docker.io/suncup/photon-js:latest \
     npm run --prefix demo-webdriverio/webdriver/best-practices test.saucelabs.v2
 
-# run via hosted orchestration
-# same docker image, same command, different execution location
+# run on sauce orchestrate container
+# same image, same command, different execution location
 #
 saucectl run --config .sauce/config-wdio-webdriver-best-practices.yml
 ```
