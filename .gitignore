@@ -43,6 +43,7 @@ _/
 results-*
 *.pem
 
+target
 artifacts
 data
 **.tar*

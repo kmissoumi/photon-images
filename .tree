@@ -4,18 +4,21 @@
 │   └── workflows
 │       ├── photon-build-image-java.yml
 │       ├── photon-build-image-js.yml
-│       └── photon-build-image-nightwatch.yml
+│       ├── photon-build-image-nightwatch.yml
+│       └── photon-build-image-python.yml
 ├── .gitignore
 ├── .nvmrc
 ├── .sauce
 │   ├── config-build-less.yml
 │   ├── config-demo-java.yml
 │   ├── config-demo-nightwatch.yml
+│   ├── config-demo-python.yml
 │   ├── config-sauce-connect-backend-dev.yml
 │   └── config-wdio-webdriver-best-practices.yml
 ├── Dockerfile-Java
 ├── Dockerfile-JavaScript
 ├── Dockerfile-Nightwatch
+├── Dockerfile-Python
 ├── LICENSE
 ├── README.md
 ├── build-less.md
@@ -24,57 +27,24 @@
 │   ├── LICENSE
 │   ├── best-practice
 │   │   ├── pom.xml
-│   │   ├── src
-│   │   │   └── test
-│   │   │       └── java
-│   │   │           └── com
-│   │   │               └── saucedemo
-│   │   │                   ├── AbstractTestBase.java
-│   │   │                   ├── Endpoints.java
-│   │   │                   ├── MobileTestsBase.java
-│   │   │                   ├── pages
-│   │   │                   │   ├── AbstractBasePage.java
-│   │   │                   │   ├── CheckoutStepOnePage.java
-│   │   │                   │   ├── LoginPage.java
-│   │   │                   │   ├── ProductsPage.java
-│   │   │                   │   └── ShoppingCartPage.java
-│   │   │                   └── tests
-│   │   │                       ├── DesktopTests.java
-│   │   │                       ├── EmuSimWebAppTests.java
-│   │   │                       └── RealDeviceWebTests.java
-│   │   └── target
-│   │       ├── classes
-│   │       ├── generated-sources
-│   │       │   └── annotations
-│   │       ├── generated-test-sources
-│   │       │   └── test-annotations
-│   │       ├── maven-status
-│   │       │   └── maven-compiler-plugin
-│   │       │       └── testCompile
-│   │       │           └── default-testCompile
-│   │       │               ├── createdFiles.lst
-│   │       │               └── inputFiles.lst
-│   │       ├── surefire-reports
-│   │       │   ├── TEST-com.saucedemo.tests.DesktopTests.xml
-│   │       │   └── com.saucedemo.tests.DesktopTests.txt
-│   │       └── test-classes
-│   │           └── com
-│   │               └── saucedemo
-│   │                   ├── AbstractTestBase$1.class
-│   │                   ├── AbstractTestBase$SauceTestWatcher.class
-│   │                   ├── AbstractTestBase.class
-│   │                   ├── Endpoints.class
-│   │                   ├── MobileTestsBase.class
-│   │                   ├── pages
-│   │                   │   ├── AbstractBasePage.class
-│   │                   │   ├── CheckoutStepOnePage.class
-│   │                   │   ├── LoginPage.class
-│   │                   │   ├── ProductsPage.class
-│   │                   │   └── ShoppingCartPage.class
-│   │                   └── tests
-│   │                       ├── DesktopTests.class
-│   │                       ├── EmuSimWebAppTests.class
-│   │                       └── RealDeviceWebTests.class
+│   │   └── src
+│   │       └── test
+│   │           └── java
+│   │               └── com
+│   │                   └── saucedemo
+│   │                       ├── AbstractTestBase.java
+│   │                       ├── Endpoints.java
+│   │                       ├── MobileTestsBase.java
+│   │                       ├── pages
+│   │                       │   ├── AbstractBasePage.java
+│   │                       │   ├── CheckoutStepOnePage.java
+│   │                       │   ├── LoginPage.java
+│   │                       │   ├── ProductsPage.java
+│   │                       │   └── ShoppingCartPage.java
+│   │                       └── tests
+│   │                           ├── DesktopTests.java
+│   │                           ├── EmuSimWebAppTests.java
+│   │                           └── RealDeviceWebTests.java
 │   └── pom.xml
 ├── demo-newman
 │   ├── README.md
@@ -110,30 +80,30 @@
 │               ├── README.md
 │               ├── package-lock.json
 │               ├── package.json
-│               ├── tests
-│               │   ├── configs
-│               │   │   ├── e2eConstants.js
-│               │   │   └── nightwatch.conf.js
-│               │   ├── custom-commands
-│               │   │   └── customSauceLabsEnd.js
-│               │   ├── helpers
-│               │   │   └── index.js
-│               │   ├── page-objects
-│               │   │   ├── LoginPage.js
-│               │   │   └── SwagOverviewPage.js
-│               │   └── specs
-│               │       ├── login.spec.js
-│               │       └── swag.items.list.spec.js
-│               └── tests_output
-│                   ├── CHROME_114.0.5735.91_Windows_login.spec.xml
-│                   ├── CHROME_114.0.5735.91_Windows_swag.items.list.spec.xml
-│                   ├── FIREFOX_113.0__login.spec.xml
-│                   ├── FIREFOX_113.0__swag.items.list.spec.xml
-│                   ├── INTERNET_EXPLORER_11_WINDOWS_login.spec.xml
-│                   ├── INTERNET_EXPLORER_11_WINDOWS_swag.items.list.spec.xml
-│                   ├── MSEDGE_113.0.1774.35_Windows_login.spec.xml
-│                   ├── MSEDGE_113.0.1774.35_Windows_swag.items.list.spec.xml
-│                   └── login.spec.xml
+│               └── tests
+│                   ├── configs
+│                   │   ├── e2eConstants.js
+│                   │   └── nightwatch.conf.js
+│                   ├── custom-commands
+│                   │   └── customSauceLabsEnd.js
+│                   ├── helpers
+│                   │   └── index.js
+│                   ├── page-objects
+│                   │   ├── LoginPage.js
+│                   │   └── SwagOverviewPage.js
+│                   └── specs
+│                       ├── login.spec.js
+│                       └── swag.items.list.spec.js
+├── demo-python
+│   ├── .gitignore
+│   ├── README.md
+│   ├── requirements.txt
+│   └── tests
+│       ├── conftest.py
+│       ├── test_authentication.py
+│       ├── test_cart.py
+│       ├── test_checkout.py
+│       └── test_navigation.py
 └── demo-webdriverio
     ├── LICENSE
     ├── appium-app
@@ -254,4 +224,4 @@
             │       └── swag.item.details.spec.ts
             └── tsconfig.json
 
-72 directories, 183 files
+57 directories, 168 files
