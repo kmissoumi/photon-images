@@ -1,0 +1,9 @@
+FROM python:3
+
+ARG basePath="/usr/build"
+ARG demoPath="demo-python"
+
+WORKDIR ${basePath}/${demoPath}
+COPY    ${demoPath} .
+
+RUN pip install -r requirements.txt

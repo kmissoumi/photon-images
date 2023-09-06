@@ -1,4 +1,4 @@
-name: Build & Test Image for Nightwatch Demo
+name: Build & Test Image for Python Demo
 
 on:
   workflow_dispatch:
@@ -31,14 +31,14 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: Dockerfile-Nightwatch
+          file: Dockerfile-Python
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: linux/amd64
           push: true
           tags: |
-            suncup/photon-nightwatch:0.1.${{ github.run_number }}
-            suncup/photon-nightwatch:latest
+             suncup/photon-python:0.1.${{ github.run_number }}
+             suncup/photon-pthon:latest
       -
         name: Install saucectl
         uses: saucelabs/saucectl-run-action@v3
@@ -47,12 +47,19 @@ jobs:
         with:
           saucectl-version: latest
           skip-run: true
+      - 
+        name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
       -
         name: Run test on CI
         continue-on-error: true
         run: |
-          npm install --prefix demo-nightwatch/webdriver/examples/update-sauce
-          npm run --prefix demo-nightwatch/webdriver/examples/update-sauce test.saucelabs
+          cd demo-python
+          pip install -r requirements.txt
+          pytest -n 15
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
@@ -60,7 +67,7 @@ jobs:
           SAUCE_BUILD_TYPE: "Direct"
           SAUCE_RUN_NUMBER: ${{ github.run_number }}
       -
-        name: Run test from CI via Docker
+        name: Run test from CI via Docker Image
         continue-on-error: true
         run: |
           docker run \
@@ -70,8 +77,8 @@ jobs:
             --env SAUCE_REGION=${SAUCE_REGION} \
             --env SAUCE_BUILD_TYPE="Docker" \
             --env SAUCE_RUN_NUMBER=${{ github.run_number }} \
-            docker.io/suncup/photon-nightwatch:latest \
-            npm run --prefix demo-nightwatch/webdriver/examples/update-sauce test.saucelabs
+            docker.io/suncup/photon-python:latest \
+            pytest -n 15
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
@@ -79,7 +86,7 @@ jobs:
       -
         name: Run test from CI via Sauce Orchestrate
         continue-on-error: true
-        run: saucectl run --config .sauce/config-demo-nightwatch.yml --env SAUCE_RUN_NUMBER=${{ github.run_number }}
+        run: saucectl run --config .sauce/config-demo-python.yml --env SAUCE_RUN_NUMBER=${{ github.run_number }}
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}

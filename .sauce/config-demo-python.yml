@@ -1,0 +1,14 @@
+apiVersion: v1alpha
+kind: imagerunner
+
+suites:
+  - name: photon-python
+    image: suncup/photon-python:latest
+    resourceProfile: c3m3
+    workload: webdriver
+    entrypoint: "pytest -n 15"
+    env:
+      SAUCE_USERNAME: ${SAUCE_USERNAME}
+      SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
+      SAUCE_REGION: ${SAUCE_REGION}
+      SAUCE_BUILD_TYPE: Orchestrate
