@@ -38,7 +38,7 @@ jobs:
           push: true
           tags: |
              suncup/photon-python:0.1.${{ github.run_number }}
-             suncup/photon-pthon:latest
+             suncup/photon-python:latest
       -
         name: Install saucectl
         uses: saucelabs/saucectl-run-action@v3
