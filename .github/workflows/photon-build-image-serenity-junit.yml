@@ -170,10 +170,12 @@ jobs:
           name: maven-logs-${{ github.run_number }}
           path: |
             ${{ github.workspace }}/demo-serenity-junit/target/failsafe-reports
+      - name: Tar Serenity Logs
+        run: tar -cvf serenity-${{ github.run_number }}.tar ${{ github.workspace }}/demo-serenity-junit/target/site/serenity
       - name: Upload Serenity Logs
         uses: actions/upload-artifact@v3
         if: always()
         with:
           name: serenity-logs-${{ github.run_number }}
           path: |
-            ${{ github.workspace }}/demo-serenity-junit/target/site/serenity
+            ${{ github.workspace }}/serenity-${{ github.run_number }}.tar
