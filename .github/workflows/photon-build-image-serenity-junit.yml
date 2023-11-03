@@ -67,7 +67,8 @@ jobs:
              suncup/photon-serenity-junit:0.1.${{ github.run_number }}
              suncup/photon-serenity-junit:latest
       - name: Install Saucectl
-        uses: saucelabs/saucectl-run-action@v3
+        uses: saucelabs/saucectl-run-action@v4
+        if: always()
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
@@ -98,6 +99,22 @@ jobs:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
           SAUCE_REGION: ${{ vars.SAUCE_REGION }}
+      #- name: Run Test from CI via Sauce Orchestrate Action
+      #  uses: saucelabs/saucectl-run-action@v4
+      #  env:
+      #    GITHUB_TOKEN: ${{ github.token }}
+      #  with:
+      #    saucectl-version: latest
+      #    sauce-username: ${{ secrets.SAUCE_USERNAME }}
+      #    sauce-access-key: ${{ secrets.SAUCE_ACCESS_KEY }}
+      #    config-file: .sauce/config-demo-serenity-junit.yml
+      #    region: ${{ vars.SAUCE_REGION }}
+      #    show-console-log: true
+      #    env: |
+      #      SAUCE_RUN_NUMBER: ${{ github.run_number }}
+      #      SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+      #      SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+      #      SAUCE_BUILD_TYPE: "Orchestrate"
       - name: Run Test from CI via Sauce Orchestrate
         continue-on-error: true
         run: saucectl run --config .sauce/config-demo-serenity-junit.yml --env SAUCE_RUN_NUMBER=${{ github.run_number }}
