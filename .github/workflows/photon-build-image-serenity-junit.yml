@@ -36,7 +36,7 @@ jobs:
       - name: Run Test on CI
         run: |
           cd demo-serenity-junit
-          ${{ github.workspace }}/demo-serenity-junit/mvnw clean verify
+          ./mvnw clean verify
         env:
           LANG: "en_US.UTF-8"
           MAVEN_OPTS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
