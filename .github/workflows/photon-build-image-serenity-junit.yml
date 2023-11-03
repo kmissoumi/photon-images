@@ -3,7 +3,7 @@ name: Build & Test Image for Serenity JUnit Demo
 on: [push]
 
 jobs:
-  build:
+  build-serenity-image:
     runs-on: ubuntu-latest
     steps:
       - name: Check out Repository
@@ -33,10 +33,20 @@ jobs:
       #  uses: s4u/setup-maven-action@v1.8.0
        # with:
          # java-version: 8
+      # 
+      # https://github.com/actions/setup-java#caching-packages-dependencies
+      # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows
+      # https://github.com/marketplace/actions/maven-cache
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+      - name: Build with Maven
+        run: mvn -B package --file ./demo-serenity-junit/pom.xml
       - name: Run Test on CI
-        run: |
-          cd demo-serenity-junit
-          ./mvnw clean verify
+        run: ./demo-serenity-junit/mvnw clean verify
         env:
           LANG: "en_US.UTF-8"
           MAVEN_OPTS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
