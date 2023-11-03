@@ -6,12 +6,10 @@ suites:
     image: node:18-alpine
     resourceProfile: c3m3
     workload: other
-    entrypoint: sh /bin/build-less.sh "demo-webdriverio/webdriver/best-practices" "test.saucelabs.v2"
+    entrypoint: sh /bin/run.sh
     files:
-      - src: "${PWD}/za.tar"
-        dst: "/var/run/za.tar"
-      - src: "${PWD}/build-less.sh"
-        dst: "/bin/build-less.sh"
+      - src: "${PWD}/run.sh"
+        dst: "/bin/run.sh"
     env:
       SAUCE_USERNAME: ${SAUCE_USERNAME}
       SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}

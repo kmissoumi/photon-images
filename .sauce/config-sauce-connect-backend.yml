@@ -1,0 +1,18 @@
+# commented keys get their values from environment variables
+#user:
+#api-key:
+#region:
+
+# this key will provision an orchestrate compatible tunnel
+# use this tunnel exclusively for backend traffic
+vm-version: 'v2alpha2'
+
+verbose: 1
+logfile: ./artifacts/logs/sc/backend-tunnel.log
+#logfile: "-"
+tunnel-name: sauce-demo-backend-tunnel
+shared-tunnel: true
+tunnel-domains:
+  - api.nasa.gov
+  - .saucedemo.com
+no-ssl-bump-domains: all

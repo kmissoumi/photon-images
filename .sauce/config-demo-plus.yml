@@ -1,0 +1,21 @@
+apiVersion: v1alpha
+kind: imagerunner
+
+# this tunnel is used by the orchestrate container
+sauce:
+  tunnel:
+    name: sauce-demo-backend-tunnel
+
+suites:
+  - name: photon-js-webdriverio-c3m4
+    image: suncup/photon-js:latest
+    resourceProfile: c3m4
+    workload: webdriver
+    entrypoint: npm run --prefix demo-webdriverio/webdriver/best-practices test.saucelabs.v2
+    env:
+      SAUCE_USERNAME: ${SAUCE_USERNAME}
+      SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
+      SAUCE_REGION: ${SAUCE_REGION}
+      SAUCE_BUILD_TYPE: Orchestrate
+      SAUCE_APP_TUNNEL_NAME: sauce-demo-app-tunnel
+
