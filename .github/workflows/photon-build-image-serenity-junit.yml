@@ -164,14 +164,14 @@ jobs:
             ${{ github.workspace }}/*.env
             ${{ github.workspace }}/*.json
       - name: Upload Maven Logs
-        uses: actions/upload-artifacts@v3
+        uses: actions/upload-artifact@v3
         if: always()
         with:
           name: maven-logs-${{ github.run_number }}
           path: |
             ${{ github.workspace }}/demo-serenity-junit/target/failsafe-reports
       - name: Upload Serenity Logs
-        uses: actions/upload-artifacts@v3
+        uses: actions/upload-artifact@v3
         if: always()
         with:
           name: serenity-logs-${{ github.run_number }}
