@@ -44,9 +44,9 @@ jobs:
           java-version: '17'
           cache: 'maven'
       - name: Build with Maven
-        run: mvn -B package --file ./demo-serenity-junit/pom.xml
+        run: mvn --batch-mode package --file ./demo-serenity-junit/pom.xml
       - name: Run Test on CI
-        run: ./demo-serenity-junit/mvnw clean verify
+        run: mvn clean verify --file ./demo-serenity-junit/pom.xml
         env:
           LANG: "en_US.UTF-8"
           MAVEN_OPTS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
@@ -162,4 +162,18 @@ jobs:
           path: |
             ${{ github.workspace }}/*.log
             ${{ github.workspace }}/*.env
-            ${{ github.workspace }}/*.json          
+            ${{ github.workspace }}/*.json
+      - name: Upload Maven Logs
+        uses: actions/upload-artifacts@v3
+        if: always()
+        with:
+          name: maven-logs-${{ github.run_number }}
+          path: |
+            ${{ github.workspace }}/demo-serenity-junit/target/failsafe-reports
+      - name: Upload Serenity Logs
+        uses: actions/upload-artifacts@v3
+        if: always()
+        with:
+          name: serenity-logs-${{ github.run_number }}
+          path: |
+            ${{ github.workspace }}/demo-serenity-junit/target/site/serenity
