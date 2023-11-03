@@ -1,6 +1,6 @@
-FROM maven:3-eclipse-temurin-17
+FROM maven:3-eclipse-temurin-17-alpine
 
-RUN apk update && apk add curl bash && rm -rf /var/cache/apk/*
+RUN apk --no-cache add curl bash jq tree
 
 ARG basePath="/usr/build"
 ARG demoPath="demo-serenity-junit"
