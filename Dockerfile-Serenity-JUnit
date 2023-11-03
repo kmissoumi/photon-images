@@ -11,5 +11,5 @@ ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 WORKDIR ${basePath}/${demoPath}
 COPY    ${demoPath} .
 
-RUN mvn --batch-mode package --file ./demo-serenity-junit/pom.xml
+RUN mvn --batch-mode package --file pom.xml
 #RUN mvn clean verify --file ./demo-serenity-junit/pom.xml
