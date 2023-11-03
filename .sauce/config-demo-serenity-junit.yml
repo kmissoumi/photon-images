@@ -1,0 +1,26 @@
+apiVersion: v1alpha
+kind: imagerunner
+
+suites:
+  - name: photon-serenity-junit
+    image: suncup/photon-serenity-junit:latest
+    resourceProfile: c3m3
+    workload: webdriver
+    entrypoint: ./mvnw clean verify
+    env:
+      SAUCE_USERNAME: ${SAUCE_USERNAME}
+      SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
+      SAUCE_REGION: ${SAUCE_REGION}
+      SAUCE_BUILD_TYPE: Orchestrate
+    artifacts:
+       - "/usr/build/best-practice/target/surefire-reports/*"
+       - "/usr/build/target/site/serenity/*"
+       - "/project/target/site/serenity/*"
+       - "/var/log/*.log"
+
+artifacts:
+  download:
+    when: always
+    match:
+      - "*"
+    directory: ./artifacts

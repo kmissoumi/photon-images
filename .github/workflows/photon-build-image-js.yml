@@ -47,6 +47,9 @@ jobs:
         with:
           saucectl-version: latest
           skip-run: true
+      - 
+        name: Upload Build to Sauce
+        run: saucectl storage upload ${{ vars.buildName }} --region eu-central-1
       -
         name: Run test on CI
         continue-on-error: true
@@ -79,7 +82,7 @@ jobs:
       -
         name: Run test from CI via Sauce Orchestrate
         continue-on-error: true
-        run: saucectl run --config .sauce/config-wdio-webdriver-best-practices.yml --env SAUCE_RUN_NUMBER=${{ github.run_number }}
+        run: saucectl run --config .sauce/config-demo-wdio-webdriver.yml --env SAUCE_RUN_NUMBER=${{ github.run_number }}C
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}

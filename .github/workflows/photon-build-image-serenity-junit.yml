@@ -1,0 +1,141 @@
+name: Build & Test Image for Serenity JUnit Demo
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Repository
+        uses: actions/checkout@v4
+      - name: View Env and GitHub Context 
+        continue-on-error: true
+        if: always()
+        shell: bash
+        run: |
+          echo ${GITHUB_CONTEXT} > github.json
+          env > base.env
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+      - name: View Secrets Context
+        continue-on-error: true
+        if: always()
+        shell: bash
+        run: echo ${SECRETS_CONTEXT} > secrets.json 
+        env:
+          SECRETS_CONTEXT: ${{ toJson(secrets) }}
+      - name: List Slash Temp
+        if: always()
+        run: ls -ltr /tmp > tmp.log
+      - name: Tree Workspace Files
+        run: tree -a ${{ github.workspace }} >> tree-workspace.log
+      - name: Install Maven
+        uses: s4u/setup-maven-action@v1.8.0
+        with:
+          java-version: 8
+      - name: Run Test on CI
+        run: |
+          cd demo-serenity/demo-serenity-junit
+          ./mvnw clean verify
+        env:
+          LANG: "en_US.UTF-8"
+          MAVEN_OPTS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+          SAUCE_REGION: ${{ vars.SAUCE_REGION }}
+          SAUCE_BUILD_TYPE: "Direct"
+          SAUCE_RUN_NUMBER: ${{ github.run_number }}
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and Push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: Dockerfile-Serenity-JUnit
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64
+          push: true
+          tags: |
+             suncup/photon-serenity-junit:0.1.${{ github.run_number }}
+             suncup/photon-serenity-junit:latest
+      - name: Install Saucectl
+        uses: saucelabs/saucectl-run-action@v3
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          saucectl-version: latest
+          skip-run: true
+      - name: List Saucectl Configuration
+        run: saucectl configure list
+        if: always()
+        env:
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+      - name: List Sauce Connect Action
+        if: always()
+        run: ls -ltr /tmp/sauce-connect-action* > sc-tmp.log
+      - name: Run Test on CI via Container
+        continue-on-error: true
+        run: |
+          docker run \
+            --platform linux/amd64 --pull always \
+            --env SAUCE_USERNAME=${SAUCE_USERNAME} \
+            --env SAUCE_ACCESS_KEY=${SAUCE_ACCESS_KEY} \
+            --env SAUCE_REGION=${SAUCE_REGION} \
+            --env SAUCE_BUILD_TYPE="Docker" \
+            --env SAUCE_RUN_NUMBER=${{ github.run_number }} \
+            docker.io/suncup/photon-serenity-junit:latest \
+            ./mvnw clean verify
+        env:
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+          SAUCE_REGION: ${{ vars.SAUCE_REGION }}
+      - name: Run Test from CI via Sauce Orchestrate
+        continue-on-error: true
+        run: saucectl run --config .sauce/config-demo-serenity-junit.yml --env SAUCE_RUN_NUMBER=${{ github.run_number }}
+        env:
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+          SAUCE_REGION: ${{ vars.SAUCE_REGION }}
+          SAUCE_BUILD_TYPE: "Orchestrate"
+      - name: Upload Local Test Artifacts
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: test-logs-${{ github.run_number }}
+          path: |
+            - ${{ github.workspace }}/artifacts/*
+            - ${{ github.workspace }}/best-practice/target/surefire-reports/*
+            - ${{ github.workspace }}/target/site/serenity/*
+           # - /project/target/site/serenity/*      
+      - name: Upload Orchestrate Artifacts
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: orchestrate-logs-${{ github.run_number }}
+          path: |
+             ${{ github.workspace }}/artifacts/*
+      - name: Upload Sauce Connect Logs
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: sauce-connect-logs-${{ github.run_number }}
+          path: |
+            /tmp/sauce-connect-action*/*.log
+      - name: Upload Env Logs
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: env-logs-${{ github.run_number }}
+          path: |
+            ${{ github.workspace }}/*.log
+            ${{ github.workspace }}/*.env
+            ${{ github.workspace }}/*.json          
