@@ -29,10 +29,10 @@ jobs:
         run: ls -ltr /tmp > tmp.log
       - name: Tree Workspace Files
         run: tree -a ${{ github.workspace }} >> tree-workspace.log
-      - name: Install Maven
-        uses: s4u/setup-maven-action@v1.8.0
-        with:
-          java-version: 8
+     # - name: Install Maven
+      #  uses: s4u/setup-maven-action@v1.8.0
+       # with:
+         # java-version: 8
       - name: Run Test on CI
         run: |
           cd demo-serenity/demo-serenity-junit
@@ -80,9 +80,6 @@ jobs:
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-      - name: List Sauce Connect Action
-        if: always()
-        run: ls -ltr /tmp/sauce-connect-action* > sc-tmp.log
       - name: Run Test on CI via Container
         continue-on-error: true
         run: |
