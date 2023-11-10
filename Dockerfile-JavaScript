@@ -1,7 +1,6 @@
 FROM node:18-alpine AS builder
 
-RUN apk update && apk add curl bash tree --no-cache
-# apk add --no-cache  # skip cache clean up
+RUN apk add --no-cache 
 ARG basePath="/usr/build"
 ARG demoPath="demo-webdriverio/webdriver/best-practices"
 

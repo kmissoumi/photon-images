@@ -6,7 +6,8 @@ const defaultBrowserSauceOptions = {
 
   build: 'WebdriverIO Async Desktop Web' + ' ' + (process.env.SAUCE_BUILD_TYPE || 'Local') + ' Build #' + (process.env.SAUCE_RUN_NUMBER || `${new Date().getTime()}`),
   screenResolution: '1600x1200',
-  tags: [ (process.env.SAUCE_BUILD_TYPE || 'local'), 'demo', 'js'  ],
+  tags: [ (process.env.SAUCE_BUILD_TYPE || 'local'), 'demo', 'js' ],
+  tunnelName: (process.env.SAUCE_APP_TUNNEL_NAME || null),
 
 };
 

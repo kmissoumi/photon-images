@@ -17,6 +17,6 @@ suites:
       SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
       SAUCE_REGION: ${SAUCE_REGION}
       SAUCE_BUILD_TYPE: Orchestrate
-      # this tunnel if needed used by your test code 
-      # SAUCE_APP_TUNNEL_NAME: ${SAUCE_APP_TUNNEL_NAME}
+
+
 
