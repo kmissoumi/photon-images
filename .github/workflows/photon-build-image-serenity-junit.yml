@@ -1,6 +1,6 @@
 name: Build & Test Image for Serenity JUnit Demo
 
-on: [push]
+on: [workflow_dispatch]
 
 jobs:
   build-serenity-image:
@@ -172,6 +172,7 @@ jobs:
             ${{ github.workspace }}/demo-serenity-junit/target/failsafe-reports
       - name: Tar Serenity Logs
         run: tar -cvf serenity-${{ github.run_number }}.tar ${{ github.workspace }}/demo-serenity-junit/target/site/serenity
+        if: always()
       - name: Upload Serenity Logs
         uses: actions/upload-artifact@v3
         if: always()

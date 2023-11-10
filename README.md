@@ -27,7 +27,7 @@ docker run \
 # run on sauce orchestrate container
 # same image, same command, different execution location
 #
-saucectl run --config .sauce/config-wdio-webdriver-best-practices.yml
+saucectl run --config .sauce/config-demo-wdio-webdriver.yml
 ```
 
 [![Build & Test Image for Webdriver Demo](https://github.com/kmissoumi/photon-images/actions/workflows/photon-build-image-js.yml/badge.svg)](https://github.com/kmissoumi/photon-images/actions/workflows/photon-build-image-js.yml)  

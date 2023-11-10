@@ -6,20 +6,6 @@ suites:
     image: suncup/photon-js:latest
     resourceProfile: c3m3
     workload: webdriver
-    #entrypoint: /bin/sh -c ls -ltr && echo "hello" && pwd
-    #entrypoint: /bin/sh -c "ls -ltr && pwd"
-    #entrypoint: /bin/sh "ls -ltr && pwd && echo "hello""
-    #entrypoint: "ls -ltr && pwd && echo 'HELLO'"
-    #entrypoint: "ls -ltr && pwd && echo \"HELLO\""
-    #entrypoint: "ls -ltr && pwd && echo $?"
-    #entrypoint: /bin/sh -c "ls -ltr; pwd; echo 'hello'; ls -ltr"                     # all commands run
-    #entrypoint: /bin/sh "ls -ltr; pwd; echo 'hello'; ls -ltr"                        # trys to run a single command and fails
-    #entrypoint: /bin/sh -c "ls -ltr; pwd; echo "hello"; ls -ltr"                     # all commands run
-    #entrypoint: /bin/sh -c "ls -ltr; pwd; echo "hello"; ls -ltr; printf 'status:%s' "$?""      # all commands run 
-    #entrypoint: "ls -ltr; pwd; echo 'hello'; ls -ltr"                               # only the first command runs
-    #entrypoint: ls -ltr && echo "hello" && pwd tree -I 'node_modules|cache|test_*' 
-    #entrypoint: /bin/sh -c "which tree; apk update && apk add --no-cache curl bash tree && rm -rf /var/cache/apk/*; which tree ;tree -I 'node_modules|cache|test_*' > /var/log/tree-01.log; pwd; ls -ltr */*/*/*; npm run --prefix demo-webdriverio/webdriver/best-practices test.saucelabs.v2; tree -I 'node_modules|cache|test_*' > /var/log/tree-02.log"
-    #entrypoint: /bin/sh -c "which tree; apk update && apk add --no-cache curl bash tree && rm -rf /var/cache/apk/*; which tree ;tree -I 'node_modules' > /var/log/tree-01.log; pwd; ls -ltr */*/*/*; npm run --prefix demo-webdriverio/webdriver/best-practices test.saucelabs.v2; tree -I 'node_modules' > /var/log/tree-02.log; tree -I 'node_modules' / > /var/log/tree-03.log"
     entrypoint: /bin/sh -c "pwd; ls */*/*/* > /var/log/ls4start.log; tree > /var/log/tree.log"
     artifacts:
       - "/var/log/*.log"

@@ -1,0 +1,30 @@
+apiVersion: v1alpha
+kind: imagerunner
+
+
+# wiremock over sauce-connect
+suites:
+  - name: photon-wiremock
+    image: wiremock/wiremock:3.0.4
+    entrypoint: bash /bin/_start
+    workload: other 
+    timeout: 5m
+    artifacts:
+      - "/var/log/sauce/*"
+    files:
+      - src: "${PWD}/config-sauce-connect.yml"
+        dst: "/var/run/config-sauce-connect.yml"
+      - src: "${PWD}/usr/_start"
+        dst: "/bin/_start"
+    env:
+      SAUCE_USERNAME: ${SAUCE_USERNAME}
+      SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
+      SAUCE_REGION: ${SAUCE_REGION}
+      SAUCE_CONTAINER_TUNNEL: ${SAUCE_CONTAINER_TUNNEL}
+
+artifacts:
+  download:
+    when: always
+    match:
+      - "*"
+    directory: ./artifacts
