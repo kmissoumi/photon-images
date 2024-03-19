@@ -1,6 +1,11 @@
 apiVersion: v1alpha
 kind: imagerunner
 
+
+sauce:
+  region: ${SAUCE_REGION}
+
+
 suites:
   - name: photon-java
     image: suncup/photon-java:latest

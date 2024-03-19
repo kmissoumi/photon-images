@@ -1,10 +1,10 @@
 apiVersion: v1alpha
 kind: imagerunner
 
-# this tunnel is used by the orchestrate container
-#sauce:
-#  tunnel:
-#    name: ${SAUCE_BACKEND_TUNNEL_NAME}
+
+sauce:
+  region: ${SAUCE_REGION}
+
 
 suites:
   - name: photon-js-webdriverio
@@ -17,6 +17,3 @@ suites:
       SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}
       SAUCE_REGION: ${SAUCE_REGION}
       SAUCE_BUILD_TYPE: Orchestrate
-
-
-
