@@ -48,9 +48,6 @@ jobs:
           saucectl-version: latest
           skip-run: true
       - 
-        name: Upload Build to Sauce
-        run: saucectl storage upload ${{ vars.buildName }} --region eu-central-1
-      -
         name: Run test on CI
         continue-on-error: true
         run: |
